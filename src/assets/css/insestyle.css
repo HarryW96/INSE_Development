@@ -20,6 +20,7 @@
   color: #6AE69E;
 }
 
+
 .top-bar{
   background-color: #191919;
 }
@@ -41,11 +42,11 @@
   margin-right: 2rem;
 }
 
-.button{
+.top-bar .button{
   background-color: #191919;
 }
 
-.button:hover{
+.top-bar .button:hover{
   background-color: #6AE69E;
 }
 
@@ -107,5 +108,40 @@
 }
 
 .fa:hover{
+  color: #6AE69E;
+}
+
+#logreg-heading{
+  text-align: center;
+  padding-top: 7rem;
+  padding-bottom: 1rem;
+}
+
+#logreg-form{
+  padding-top: 2rem;
+  padding-left: 40rem;
+  padding-right: 40rem;
+}
+
+#logreg-button{
+  text-align: center;
+  padding-top: 3rem;
+  padding-left: 50rem;
+  padding-right: 50rem;
+  padding-bottom: 2rem;
+}
+
+#logreg-button .button{
+  background-color: #6AE69E;
+  color: black;
+  font-size: 1.25rem;
+}
+
+#logreg-member{
+  text-align: center;
+  padding-bottom: 6.9rem;
+}
+
+#logreg-member a{
   color: #6AE69E;
 }
