@@ -1,3 +1,8 @@
+a{
+  width:0;
+  height: 0;
+}
+
 .row{
   max-width: none;
   width: 100%;
