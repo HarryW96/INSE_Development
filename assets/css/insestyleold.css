@@ -1,3 +1,8 @@
+a{
+  width:0;
+  height: 0;
+}
+
 .row{
   max-width: none;
   width: 100%;
@@ -125,6 +130,10 @@
 
 #logreg-button{
   text-align: center;
+  padding-top: 3rem;
+  padding-left: 50rem;
+  padding-right: 50rem;
+  padding-bottom: 2rem;
 }
 
 #logreg-button .button{
@@ -140,27 +149,4 @@
 
 #logreg-member a{
   color: #6AE69E;
-}
-
-@media (max-width: 1600px) {
-  #logreg-heading{
-    text-align: center;
-    padding-top: 5rem;
-    padding-bottom: 0.5rem;
-  }
-
-  #logreg-form{
-    padding-top: 2rem;
-    padding-left: 25rem;
-    padding-right: 25rem;
-  }
-
-  #logreg-button{
-    text-align: center;
-  }
-
-  #logreg-member{
-    text-align: center;
-    padding-bottom: 5rem;
-  }
 }
