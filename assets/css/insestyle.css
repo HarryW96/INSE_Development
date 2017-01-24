@@ -195,3 +195,35 @@
 
   }
 }
+
+/*Event Page Styling*/
+@media (max-width: 1600px){
+  #event_heading{
+    text-align: center;
+    padding-top: 2rem;
+  }
+
+  #event_image{
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  #event_image img{
+    height: 14rem;
+    width: 14rem;
+    border-radius: 50%;
+  }
+
+  #event_description{
+    padding-left: 8rem;
+  }
+
+  #event_locations{
+    padding-left: 8rem;
+  }
+
+  #event_locations span{
+    padding-left: 5rem;
+  }
+}
