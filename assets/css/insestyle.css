@@ -1,8 +1,9 @@
+/* General Styling */
 .row{
   max-width: none;
   width: 100%;
 }
-
+/* Top Bar and Menu Styling */
 .off-canvas-wrapper{
   background-color: #191919;
 }
@@ -50,7 +51,7 @@
   background-color: #6AE69E;
 }
 
-
+/* Index Styling */
 #frontpage_banner{
   margin: 0;
   padding-top: 7rem;
@@ -89,8 +90,9 @@
 .orbit img{
   height: 40rem;
 }
-
+/* Footer Styling */
 #footer-icons{
+  padding-top: 2rem;
   height: 10rem;
   background-color: #191919;
   text-align: center;
@@ -110,7 +112,7 @@
 .fa:hover{
   color: #6AE69E;
 }
-
+/*Login and register styling*/
 #logreg-heading{
   text-align: center;
   padding-top: 7rem;
@@ -162,5 +164,34 @@
   #logreg-member{
     text-align: center;
     padding-bottom: 5rem;
+  }
+}
+
+/* Profile Styling */
+#profile_image{
+  border-radius: 50%;
+}
+
+@media (max-width: 1600px) {
+  #customer_details_wrap{
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  #profile_image_wrap{
+    padding-top: 1rem;
+    padding-left: 20rem;
+    padding-bottom: 1rem;
+  }
+
+  #profile_image{
+    padding: 1rem;
+    height: 16rem;
+    width: 16rem;
+  }
+
+  #customer_details{
+    padding-top: 3rem;
+
   }
 }
