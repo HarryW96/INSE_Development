@@ -115,8 +115,8 @@
 /*Login and register styling*/
 #logreg-heading{
   text-align: center;
-  padding-top: 7rem;
-  padding-bottom: 1rem;
+  padding-top: 9rem;
+  padding-bottom: 1.35rem;
 }
 
 #logreg-form{
@@ -137,7 +137,7 @@
 
 #logreg-member{
   text-align: center;
-  padding-bottom: 6.9rem;
+  padding-bottom: 9.5rem;
 }
 
 #logreg-member a{
@@ -170,6 +170,21 @@
 /* Profile Styling */
 #profile_image{
   border-radius: 50%;
+  height: 22rem;
+  width: 22rem;
+}
+
+#profile_image_wrap{
+  padding-left: 30rem;
+}
+
+#customer_details{
+    padding-top: 5rem;
+  }
+
+#customer_details_wrap{
+  padding-top: 10rem;
+  padding-bottom: 10.3rem;
 }
 
 @media (max-width: 1600px) {
@@ -185,6 +200,7 @@
   }
 
   #profile_image{
+    border-radius: 50%;
     padding: 1rem;
     height: 16rem;
     width: 16rem;
@@ -197,6 +213,44 @@
 }
 
 /*Event Page Styling*/
+#event_heading{
+  text-align: center;
+  padding-top: 4rem;
+}
+
+#event_heading h3{
+  font-size: 3rem;
+}
+
+#event_image{
+  text-align: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+#event_image img{
+  height: 20rem;
+  width: 20rem;
+  border-radius: 50%;
+}
+
+#event_description{
+  padding-left: 18rem;
+  padding-right: 6rem;
+}
+
+#event_locations{
+  padding-left: 8rem;
+}
+
+#event_locations span{
+  padding-left: 10rem;
+}
+
+#event_info{
+  padding-bottom: 3rem;
+}
+
 @media (max-width: 1600px){
   #event_heading{
     text-align: center;
