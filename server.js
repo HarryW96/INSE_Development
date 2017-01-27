@@ -10,22 +10,32 @@ app.use(express.static(__dirname + "/pages"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(session({
-  secret: 'keyboard cat',
+  secret: 'nurf this',
   resave: false,
   saveUninitialized: true,
-  cookie: {secture:true}
+  //cookie: {secure:true}
 }));
 //Code Body
 
 // Sets
 app.get("/test", function(req,res){
-  req.session.hi = "spaghetti";
+  if(!req.session.test){
+    req.session.test = 0;
+  }
+  req.session.test = req.session.test + 1;
+  console.log(req.session.test);
   res.send("done");
-})
+});
 
 app.get("/test/test", function(req,res){
   console.log(req.session.hi);
   res.send("done");
+});
+
+//Check login details
+app.post("/user", function(req,res){
+  req.session.user = req.body.user;
+  console.log("Logged in as "  + req.session.user);
 })
 
 //Register a new user

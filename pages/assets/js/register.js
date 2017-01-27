@@ -1,6 +1,6 @@
 var xhr = new XMLHttpRequest();
 
-// Gets the user details and applys validation on them.
+// Gets the user details and applies validation on them.
 // If valid will pass data to the server to register the user.
 function registerUser(){
   var name = document.getElementById("reg-name")
