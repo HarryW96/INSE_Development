@@ -11,18 +11,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(session({secret: "ssshhhhh"}));
 //Code Body
-var sess
 
-app.get("/",function(req,res){
-  console.log("heyo");
-  res.sendFile(__dirname + "/pages/home.html");
-})
+
 
 //Register a new user
 app.post("/user/register", function(req,res){
   addUserToDatabase(req.body);
   res.send(req.body.name + " was registered sucessfully.");
   console.log(req.body.name + " was registered sucessfully.")
+  console.log(req.session.lastpage);
   res.end("done")
 })
 
