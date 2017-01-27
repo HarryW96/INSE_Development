@@ -10,14 +10,15 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/"));
 //Code Body
 
+//Register a new user
 app.post("/user/register", function(req,res){
-  console.log(req.body);
   addUserToDatabase(req.body);
-
-
-  res.send("Got it!");
+  res.send(req.body.name + " was registered sucessfully.");
+  console.log(req.body.name + " was registered sucessfully.")
 })
 
+
+// Create a new user entry in the database using a JSON file conisting of thier submited details.
 function addUserToDatabase(user){
   var connection = mysql.createConnection({
     host: "localhost",
@@ -26,12 +27,9 @@ function addUserToDatabase(user){
     database: "test"
   })
   connection.connect();
-
   connection.query("INSERT INTO user SET ?", {Name: user.name, Email: user.email, Password: user.pass}, function(err,result){
     if (err) throw err;
-
   });
-
   connection.end();
 }
 
