@@ -9,10 +9,24 @@ var mysql = require("mysql");
 app.use(express.static(__dirname + "/pages"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(session({secret: "ssshhhhh"}));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {secture:true}
+}));
 //Code Body
 
+// Sets
+app.get("/test", function(req,res){
+  req.session.hi = "spaghetti";
+  res.send("done");
+})
 
+app.get("/test/test", function(req,res){
+  console.log(req.session.hi);
+  res.send("done");
+})
 
 //Register a new user
 app.post("/user/register", function(req,res){
