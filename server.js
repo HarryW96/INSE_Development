@@ -38,7 +38,7 @@ app.post("/user", function(req,res){
     for(i = 0;i < results.length;i++){
       if(results[i].Password == req.body.pass){
         console.log("User " + req.body.name + " sucessfully logged in!");
-        req.session.loginid = results[i].ID;
+        req.session.loginid = results[i].Name;
         console.log(req.session.loginid);
         connection.end();
         res.send("done");
