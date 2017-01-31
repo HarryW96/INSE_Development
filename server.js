@@ -23,13 +23,20 @@ app.use(session({
 }));
 //Code Body
 
-// Sets
-app.get("/test", function(req,res){
-  console.log(req.session.loginid);
-  res.send("done");
-});
+//Checks if there's a currently logged in user and sends back what user is logged in.
+app.get("/user", function(req,res){
+    console.log(req.session.loginid);
+  if(req.session.loginid == undefined){
+    res.send("No_Active_Login");
+  }
+  else{
+    console.log("Requested user: " + req.session.loginid);
+    res.send(req.session.loginid);
+  }
+})
 
-//Check login details
+
+//Check login details for when user logs in first time
 app.post("/user", function(req,res){
   //checkUserLogin(req.body, req.session);
   var connection = mysql.createConnection(sqlLogin);
@@ -45,8 +52,7 @@ app.post("/user", function(req,res){
       }
     }
   });
-
-})
+});
 
 //Register a new user
 app.post("/user/register", function(req,res){
