@@ -91,7 +91,7 @@ app.post("/user/register", function(req,res){
 function addUserToDatabase(user){
   var connection = mysql.createConnection(sqlLogin);
   connection.connect();
-  connection.query("INSERT INTO user SET ?", {Name: user.name, Email: user.email, Password: user.pass}, function(err,result){
+  connection.query("INSERT INTO user SET ?", {Name: user.name, Email: user.email,Phone: user.phone, Password: user.pass}, function(err,result){
     if (err) throw err;
   });
   connection.end();

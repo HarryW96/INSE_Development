@@ -5,11 +5,12 @@ var xhr = new XMLHttpRequest();
 function registerUser(){
   var name = document.getElementById("reg-name")
   var email = document.getElementById("reg-email");
+  var phone = document.getElementById("reg-phone");
   var pass = document.getElementById("reg-pass");
   var passCheck = document.getElementById("reg-passcheck");
-  var user = { name: name.value, email:email.value, pass:pass.value, passcheck:passCheck.value}
+  var user = { name: name.value, email:email.value,phone:phone.value, pass:pass.value, passcheck:passCheck.value}
 
-  if(pass.value == "" || passCheck.value == "" || name.value == "" || email.value == ""){
+  if(pass.value == "" || passCheck.value == "" || name.value == "" || email.value == "" || phone.value == ""){
     alert("Please fill all fields");
   }
   else if(pass.value != passCheck.value){
