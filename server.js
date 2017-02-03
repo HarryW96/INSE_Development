@@ -35,6 +35,20 @@ app.get("/user", function(req,res){
   }
 })
 
+//Gets currently logged in users additonal details WIP
+// app.get("/user/detail", function(req,res){
+//   var details
+//   if (req.session.loginid == undefined){
+//     details = {"user": "N/A", "email": "N/A", "phone": "NA"};
+//     console.log(details);
+//     res.status(404).send(details);
+//   }
+//   else{
+//     details = {"user": req.session.}
+//
+//   }
+// })
+
 
 //Check login details for when user logs in first time
 app.post("/user", function(req,res){
