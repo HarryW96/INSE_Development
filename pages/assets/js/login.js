@@ -7,6 +7,11 @@ function loginCheck(){
 
   xhr.open("POST", "/user");
   xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
+      alert(xhr.responseText);
+    }
+  }
   xhr.send(JSON.stringify(userDetails));
   console.log(JSON.stringify(userDetails));
 }

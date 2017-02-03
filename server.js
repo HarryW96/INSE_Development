@@ -42,15 +42,19 @@ app.post("/user", function(req,res){
   var connection = mysql.createConnection(sqlLogin);
 
   connection.query("SELECT * FROM `user` WHERE `Name` = ?",[req.body.name], function(err,results,fields){
+    if(results.length == 0){
+      res.end("ERROR: NO USER FOUND!");
+    }
     for(i = 0;i < results.length;i++){
       if(results[i].Password == req.body.pass){
         console.log("User " + req.body.name + " sucessfully logged in!");
         req.session.loginid = results[i].Name;
         console.log(req.session.loginid);
         connection.end();
-        res.send("done");
+        res.send("Welcome " + req.body.name);
       }
     }
+
   });
 });
 
@@ -64,24 +68,24 @@ app.post("/user/register", function(req,res){
 
 
 // Gets user details from database and compares to submited data. Will return user ID if there's a match
-function checkUserLogin(user,session){
-  var connection = mysql.createConnection(sqlLogin);
-
-  connection.query("SELECT * FROM `user` WHERE `Name` = ?",[user.name], function(err,results,fields){
-    for(i = 0;i < results.length;i++){
-      if(results[i].Password == user.pass){
-        console.log("User " + user.name + " sucessfully logged in!");
-        session.loginid = results[i].ID;
-        console.log(session.loginid);
-        return true;
-      }
-    }
-    console.log("User details where invalid");
-  })
-
-  connection.end();
-
-}
+// function checkUserLogin(user,session){
+//   var connection = mysql.createConnection(sqlLogin);
+//
+//   connection.query("SELECT * FROM `user` WHERE `Name` = ?",[user.name], function(err,results,fields){
+//     for(i = 0;i < results.length;i++){
+//       if(results[i].Password == user.pass){
+//         console.log("User " + user.name + " sucessfully logged in!");
+//         session.loginid = results[i].ID;
+//         console.log(session.loginid);
+//         return true;
+//       }
+//     }
+//     console.log("User details where invalid");
+//   })
+//
+//   connection.end();
+//
+// }
 
 // Create a new user entry in the database using a JSON file conisting of thier submited details.
 function addUserToDatabase(user){
