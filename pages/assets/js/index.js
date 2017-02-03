@@ -8,8 +8,11 @@ function getLoginDetails(){
   xhr.onreadystatechange = function(){
     var response = xhr.responseText;
     console.log("Server responded with: " + response);
-    console.log(response);
     loginEle.innerHTML = response;
+    if(xhr.status != 404){
+      loginEle.setAttribute("onclick","window.location.href='/profile.html'");
+    }
+
   }
   xhr.send();
 

@@ -27,11 +27,11 @@ app.use(session({
 app.get("/user", function(req,res){
     console.log(req.session.loginid);
   if(req.session.loginid == undefined){
-    res.send("No_Active_Login");
+    res.status(404).send("No_Active_Login");
   }
   else{
     console.log("Requested user: " + req.session.loginid);
-    res.send(req.session.loginid);
+    res.status(200).send(req.session.loginid);
   }
 })
 
