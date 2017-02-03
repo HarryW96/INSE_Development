@@ -93,4 +93,4 @@ function addUserToDatabase(user){
   connection.end();
 }
 
-app.listen(8080);
+app.listen(80);
