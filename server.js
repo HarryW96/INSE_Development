@@ -46,7 +46,7 @@ app.get("/user/detail", function(req,res){
   else{
     details = {"user": req.session.loginid,"email": req.session.loginEmail, "phone": req.session.loginPhone}
     console.log("User details found. Sending profile to client")
-    res.status(200).send(details);
+    res.status(200).send(JSON.stringify(details));
   }
 });
 
