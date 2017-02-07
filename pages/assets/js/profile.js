@@ -17,7 +17,7 @@ function getUserProfile(){
     if(xhr.readyState == XMLHttpRequest.DONE){ //TODO replace all (xhr.readystate && xhr.statusCode) with this new format
       console.log("Ready!")
       if(xhr.status == 200){
-        Console.log("Ready to update profile!")
+        console.log("Ready to update profile!")
         var profileData = JSON.parse(xhr.responseText);
 
         nameEle.innerText = profileData.user;
