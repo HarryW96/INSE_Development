@@ -6,16 +6,17 @@ function getLoginDetails(){
   console.log("Getting user detials");
   xhr.open("GET", "/user")
   xhr.onreadystatechange = function(){
-    var response = xhr.responseText;
-    console.log("Server responded with: " + response);
-    loginEle.innerHTML = response;
-    if(xhr.status != 404){
-      loginEle.setAttribute("onclick","window.location.href='/profile.html'");
+    if(xhr.readyState = XMLHttpRequest.DONE){
+      if(xhr.status == 200){
+        var response = xhr.responseText;
+        loginEle.innerHTML = response;
+      }
+      else if(xhr.status == 401){
+        loginEle.innerText = "Login"
+      }
     }
-
   }
   xhr.send();
-
 }
 
 window.addEventListener("load", getLoginDetails);

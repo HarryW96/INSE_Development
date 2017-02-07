@@ -28,7 +28,6 @@ app.use(session({
 app.get("/user", function(req,res){
     console.log(req.session.loginid);
   if(req.session.loginid == undefined){
-    res.status(404).send("No_Active_Login");
   }
   else{
     console.log("Requested user: " + req.session.loginid);

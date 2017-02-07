@@ -9,7 +9,7 @@ function loginCheck(){
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = function(){
     if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
-      alert(xhr.responseText);
+      alert(xhr.responseText); //Login session is stablished via hidden cookie data. Setup server-side automaticlly.
     }
   }
   xhr.send(JSON.stringify(userDetails));
