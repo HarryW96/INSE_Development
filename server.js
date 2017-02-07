@@ -5,6 +5,7 @@ var app = express();
 var bodyParser = require("body-parser");
 // Database and MySQL
 var mysql = require("mysql");
+// TODO Replace login details with proper bookit database. Thx adam :)
 var sqlLogin = {
   host: "localhost",
   user: "bookit",
@@ -62,7 +63,9 @@ app.post("/user", function(req,res){
     for(i = 0;i < results.length;i++){
       if(results[i].Password == req.body.pass){
         console.log("User " + req.body.name + " sucessfully logged in!");
-        req.session.loginid = results[i].Name;
+        req.session.loginid = results[i].Name; //TODO loginid should be changed to loginName but as to not break other code
+        req.session.loginPhone = results[i].Phone;
+        req.session.loginEmail = results[i].Email;
         console.log(req.session.loginid);
         connection.end();
         res.send("Welcome " + req.body.name);
