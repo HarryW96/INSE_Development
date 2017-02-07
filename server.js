@@ -41,7 +41,7 @@ app.get("/user/detail", function(req,res){
   if (req.session.loginid == undefined){
     details = {"user": "N/A", "email": "N/A", "phone": "NA"};
     console.log("No User Logged!!!");
-    res.status(403).send(details);
+    res.status(401).send(details);
   }
   else{
     details = {"user": req.session.loginid,"email": req.session.loginEmail, "phone": req.session.loginPhone}

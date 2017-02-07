@@ -1,6 +1,9 @@
 var xhr = new XMLHttpRequest();
 
-// Will show who's currently logged in
+/*
+ Will check if users are currently logged in and if they are it'll update the profile with their infomation
+ Otherwise if it finds that there's no active login session it'll redirect the user to the login page.
+*/
 function getUserProfile(){
   var nameEle = document.getElementById("profile-name");
   var emailEle = document.getElementById("profile-email");
@@ -9,15 +12,21 @@ function getUserProfile(){
   xhr.open("GET", "/user/detail");
   xhr.onreadystatechange = function(){
     if(xhr.readyState == XMLHttpRequest.DONE){ //TODO replace all (xhr.readystate && xhr.statusCode) with this new format
-      var profileData = JSON.parse(xhr.responseText);
+      console.log("Ready!")
+      if(xhr.status == 200){
+        Console.log("Ready to update profile!")
+        var profileData = JSON.parse(xhr.responseText);
 
-      nameEle.innerText = profileData.user;
-      emailEle.innerText = profileData.email;
-      phoneEle.innerText = profileData.phone;
+        nameEle.innerText = profileData.user;
+        emailEle.innerText = profileData.email;
+        phoneEle.innerText = profileData.phone;
+      }
+      else if(xhr.status == 401){ // If the user is not logged in they'll be redirected to the login page
+        window.location = "./login.html";
+      }
     }
   }
   xhr.send(null);
-  console.log("HEYO")
 }
 
 window.addEventListener("load", getUserProfile);
