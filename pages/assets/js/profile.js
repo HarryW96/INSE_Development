@@ -8,14 +8,15 @@ function getUserProfile(){
 
   xhr.open("GET", "/user/detail");
   xhr.onreadystatechange = function(){
-    var profileData = JSON.parse(xhr.responseText);
-    console.log(profileData);
+    if(xhr.readyState == XMLHttpRequest.DONE){ //TODO replace all (xhr.readystate && xhr.statusCode) with this new format
+      var profileData = JSON.parse(xhr.responseText);
 
-    nameEle.innerText = profileData.user;
-    emailEle.innerText = profileData.email;
-    phoneEle.innerText = profileData.phone;
+      nameEle.innerText = profileData.user;
+      emailEle.innerText = profileData.email;
+      phoneEle.innerText = profileData.phone;
+    }
   }
-  xhr.send();
+  xhr.send(null);
   console.log("HEYO")
 }
 
