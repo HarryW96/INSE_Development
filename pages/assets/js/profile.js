@@ -6,20 +6,18 @@ function getUserProfile(){
   var emailEle = document.getElementById("profile-email");
   var phoneEle = document.getElementById("profile-phone");
 
-  xhr.open("GET", "/user/detail")
+  xhr.open("GET", "/user/detail");
   xhr.onreadystatechange = function(){
-    if(xhr.readyState === 4){
-      if(xhr.statusCode == 404){
-        console.log("No Active User!")
-      }
-      else{
-        console.log("UNDER DEVELOPMENT")
-        alert("Active user found! We're sorry but this page is under development.")
-
-      }
+    if(xhr.readyState == 4 && xhr.statusCode == 200){
+      console.log(xhr.responseText);
+      console.log("hi")
+      nameEle.innerText = xhr.responseText.user;
+      emailEle.innerText = xhr.responseText.email;
+      phoneEle.innerText = xhr.responseText.phone;
     }
   }
   xhr.send();
+  console.log("HEYO")
 }
 
 window.addEventListener("load", getUserProfile);
