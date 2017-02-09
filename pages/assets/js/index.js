@@ -19,4 +19,12 @@ function getLoginDetails(){
   xhr.send();
 }
 
+function logout(){
+  var logoutButton = document.getElementById("logout");
+
+  logoutButton.addEventListener("click"){
+    session.clear();
+  }
+}
+
 window.addEventListener("load", getLoginDetails);
