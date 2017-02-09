@@ -289,11 +289,11 @@
     padding-right: 6rem;
 }
 
-#event_locations {
+#event_locations_wrap {
     padding-left: 8rem;
 }
 
-#event_locations span {
+#event_locations_wrap span {
     padding-left: 10rem;
 }
 
