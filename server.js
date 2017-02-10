@@ -27,7 +27,7 @@ app.use(session({
 //Checks if there's a currently logged in user and sends back what user is logged in.
 app.get("/user", function(req,res){
     console.log(req.session.loginid);
-  if(req.session.loginid == undefined){
+  if(req.session.loginid == null){
     res.status(401).send();
   }
   else{
@@ -36,9 +36,13 @@ app.get("/user", function(req,res){
   }
 })
 
+/*
+  If there's an active and valid login session then the website will return additonal infomation to the session
+*/
+
 app.get("/user/detail", function(req,res){
   var details
-  if (req.session.loginid == undefined){
+  if (req.session.loginid == null){
     details = {"user": "N/A", "email": "N/A", "phone": "NA"};
     console.log("No User Logged!!!");
     res.status(401).send(details);
@@ -47,6 +51,18 @@ app.get("/user/detail", function(req,res){
     details = {"user": req.session.loginid,"email": req.session.loginEmail, "phone": req.session.loginPhone}
     console.log("User details found. Sending profile to client")
     res.status(200).send(JSON.stringify(details));
+  }
+});
+/*
+  Destroys the current session of the active user and returns an error message if there's no user
+*/
+app.get("/user/logout", function(req,res){
+  if(req.session.loginid == null){
+    res.status(200).send("No user logged in.")
+  }
+  else{
+    req.session.destroy();
+    res.status(200).send("User sucessfully logged out!");
   }
 });
 

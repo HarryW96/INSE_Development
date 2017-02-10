@@ -1,10 +1,11 @@
-var xhr = new XMLHttpRequest();
+
 
 // Will show who's currently logged in
 function getLoginDetails(){
+  var xhr = new XMLHttpRequest();
   var loginEle = document.getElementById("user-display");
   console.log("Getting user detials");
-  xhr.open("GET", "/user")
+  xhr.open("GET", "/user");
   xhr.onreadystatechange = function(){
     if(xhr.readyState = XMLHttpRequest.DONE){
       if(xhr.status == 200){
@@ -19,12 +20,17 @@ function getLoginDetails(){
   xhr.send();
 }
 
-function logout(){
-  var logoutButton = document.getElementById("logout");
-
-  logoutButton.addEventListener("click"){
-    session.clear();
+function logoutUser(){
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "/user/logout");
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+      alert(xhr.responseText);
+      document.location.reload();
+    }
   }
+  xhr.send();
 }
 
+document.getElementById("logout").addEventListener("click", logoutUser);
 window.addEventListener("load", getLoginDetails);
