@@ -27,13 +27,13 @@ app.use(session({
 
 //Checks if there's a currently logged in user and sends back what user is logged in.
 app.get("/user", function(req,res){
-    console.log(req.session.loginid);
-  if(req.session.loginid == null){
+    console.log(req.session.login_id);
+  if(req.session.login_id == null){
     res.status(401).send();
   }
   else{
-    console.log("Requested user: " + req.session.loginid);
-    res.status(200).send(req.session.loginid);
+    console.log("Requested user: " + req.session.login_fName);
+    res.status(200).send(req.session.login_fName + "is logged in.");
   }
 });
 
@@ -42,14 +42,14 @@ app.get("/user", function(req,res){
 */
 app.get("/user/detail", function(req,res){
   var details
-  if (req.session.loginid == null){
+  if (req.session.login_id == null){
     details = {"user": "N/A", "email": "N/A", "phone": "NA"};
     console.log("No User Logged!!!");
     res.status(401).send(details);
   }
   else{
-    details = {"user": req.session.loginid,"email": req.session.loginEmail, "phone": req.session.loginPhone}
-    console.log("User details found. Sending profile to client");
+    details = {"user": req.session.login_fName,"email": req.session.login_email, "phone": req.session.login_phone}
+    console.log("User details found. Sending profile to client.");
     res.status(200).send(JSON.stringify(details));
   }
 });
@@ -67,22 +67,23 @@ app.get("/user/logout", function(req,res){
 });
 
 //Check login details for when user logs in first time
-//TODO Change to GET instead of POST
-app.post("/user", function(req,res){
+app.post("/user/login", function(req, res){
   var connection = mysql.createConnection(sqlLogin);
-  connection.query("SELECT * FROM `user` WHERE `Name` = ?",[req.body.name], function(err,results,fields){
+  console.log(req.body.name);
+  connection.query("SELECT * FROM `user` WHERE `email` = ?",[req.body.name], function(err,results,fields){
     if(results.length == 0){
-      res.end("ERROR: NO USER FOUND!");
+      return res.status(404).send("ERROR: NO USER FOUND!");
     }
     for(i = 0;i < results.length;i++){
-      if(results[i].Password == req.body.pass){
-        console.log("User " + req.body.name + " sucessfully logged in!");
-        req.session.loginid = results[i].Name; //TODO loginid should be changed to loginName but as to not break other code
-        req.session.loginPhone = results[i].Phone;
-        req.session.loginEmail = results[i].Email;
-        console.log(req.session.loginid);
+      if(results[i].password == req.body.pass){
+        console.log("User " + req.body.fName + " sucessfully logged in!");
+        req.session.login_id = results[i].U_ID;
+        req.session.login_fName = results[i].fName; //TODO loginid should be changed to loginName but as to not break other code
+        req.session.login_phone = results[i].phone;
+        req.session.login_email = results[i].email;
+        console.log("User " + req.session.fName + " just logged in.");
         connection.end();
-        res.send("Welcome " + req.body.name);
+        res.send("Welcome " + req.session.fName);
       }
     }
   });
@@ -91,17 +92,18 @@ app.post("/user", function(req,res){
 //Register a new user
 app.post("/user/register", function(req,res){
   addUserToDatabase(req.body);
-  res.send(req.body.fName + " was registered sucessfully.");
-  console.log(req.body.fName + " was registered sucessfully.");
+  res.send(req.body.name + " was registered sucessfully.");
+  console.log(req.body.name + " was registered sucessfully.");
   res.end("done")
 })
 
 //Test database
+//TODO Remove for release
 function databaseTestData(){
   var connection = mysql.createConnection(sqlLogin);
   connection.connect();
   var data = {fName: 'Bob', lName: 'Ross', dob: '2017/02/23', address: 'an address', email: 'something@something.com', phoneNum: '15468754', password: '12345'};
-  var query = connection.query('INSERT INTO posts SET ?', data, function(err, result){
+  var query = connection.query('INSERT INTO user SET ?', data, function(err, result){
   // Success!
   });
   console.log(query.sql); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'

@@ -27,7 +27,17 @@ function registerUser(){
     passCheck = "";
   }
   else{
-    var user = { "fName": fName,"lName": lName, "date": date, "address": address, "city": city, "postcode": postcode, "email": email, "phone": phone, "pass": pass, "passcheck": passCheck}
+    var user = {
+    "fName": fName,
+    "lName": lName,
+    "date": date,
+    "address": address,
+    "city": city,
+    "postcode": postcode,
+    "email": email,
+    "phone": phone,
+    "pass": pass,
+    "passCheck": passCheck}
     console.log("Started send process");
     xhr.open("POST", "/user/register");
     xhr.setRequestHeader("Content-Type", "application/json");
