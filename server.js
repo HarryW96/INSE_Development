@@ -151,4 +151,5 @@ function addUserToDatabase(user){
 }
 
 databaseTestData();
+databaseEventTestData();
 app.listen(8080);
