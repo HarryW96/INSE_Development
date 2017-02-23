@@ -10,7 +10,7 @@ var sqlLogin = {
   host: "localhost",
   user: "bookit",
   password: "1234",
-  database: "test"
+  database: "bookit"
 };
 
 //Initalization
@@ -40,7 +40,6 @@ app.get("/user", function(req,res){
 /*
   If there's an active and valid login session then the website will return additonal infomation to the session
 */
-
 app.get("/user/detail", function(req,res){
   var details
   if (req.session.loginid == null){
@@ -67,12 +66,10 @@ app.get("/user/logout", function(req,res){
   }
 });
 
-
 //Check login details for when user logs in first time
 app.post("/user", function(req,res){
   //checkUserLogin(req.body, req.session);
   var connection = mysql.createConnection(sqlLogin);
-
   connection.query("SELECT * FROM `user` WHERE `Name` = ?",[req.body.name], function(err,results,fields){
     if(results.length == 0){
       res.end("ERROR: NO USER FOUND!");
