@@ -14,13 +14,12 @@ create table if not exists bookit.user(
 
 create table if not exists bookit.event(
   E_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  NAME VARCHAR(40) NOT NULL,
-  Host_ID INT NOT NULL,
-  EDate DATE NOT NULL,
-  Location VARCHAR(40) NOT NULL,
-  Capcaity INT NOT NULL,
-  Descr TEXT(300) NOT NULL,
-  Image VARCHAR(45) NOT NULL,
+  event_Name VARCHAR(40) NOT NULL,
+  eDate DATE NOT NULL,
+  location VARCHAR(40) NOT NULL,
+  capacity INT NOT NULL,
+  descrp VARCHAR(300) NOT NULL,
+  image VARCHAR(45),
 );
 
 create table if not exists bookit.userEvent(
