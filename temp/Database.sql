@@ -5,6 +5,7 @@ CREATE TABLE User(
   dob DATE NOT NULL,
   address VARCHAR(45),
   email VARCHAR(45),
+  phoneNum VARCHAR(30),
   password VARCHAR(20),
   UNIQUE(email)
 );
