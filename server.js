@@ -12,6 +12,7 @@ var sqlLogin = {
   password: "1234",
   database: "test"
 };
+
 //Initalization
 app.use(express.static(__dirname + "/pages"));
 app.use(bodyParser.json());
@@ -29,9 +30,9 @@ app.get("/user", function(req,res){
     console.log(req.session.loginid);
   if(req.session.loginid == null){
     res.status(401).send();
-  }
   else{
     console.log("Requested user: " + req.session.loginid);
+  }
     res.status(200).send(req.session.loginid);
   }
 })
@@ -49,7 +50,7 @@ app.get("/user/detail", function(req,res){
   }
   else{
     details = {"user": req.session.loginid,"email": req.session.loginEmail, "phone": req.session.loginPhone}
-    console.log("User details found. Sending profile to client")
+    console.log("User details found. Sending profile to client");
     res.status(200).send(JSON.stringify(details));
   }
 });
@@ -58,7 +59,7 @@ app.get("/user/detail", function(req,res){
 */
 app.get("/user/logout", function(req,res){
   if(req.session.loginid == null){
-    res.status(200).send("No user logged in.")
+    res.status(200).send("No user logged in.");
   }
   else{
     req.session.destroy();
@@ -87,7 +88,6 @@ app.post("/user", function(req,res){
         res.send("Welcome " + req.body.name);
       }
     }
-
   });
 });
 
@@ -95,30 +95,9 @@ app.post("/user", function(req,res){
 app.post("/user/register", function(req,res){
   addUserToDatabase(req.body);
   res.send(req.body.name + " was registered sucessfully.");
-  console.log(req.body.name + " was registered sucessfully.")
+  console.log(req.body.name + " was registered sucessfully.");
   res.end("done")
 })
-
-
-// Gets user details from database and compares to submited data. Will return user ID if there's a match
-// function checkUserLogin(user,session){
-//   var connection = mysql.createConnection(sqlLogin);
-//
-//   connection.query("SELECT * FROM `user` WHERE `Name` = ?",[user.name], function(err,results,fields){
-//     for(i = 0;i < results.length;i++){
-//       if(results[i].Password == user.pass){
-//         console.log("User " + user.name + " sucessfully logged in!");
-//         session.loginid = results[i].ID;
-//         console.log(session.loginid);
-//         return true;
-//       }
-//     }
-//     console.log("User details where invalid");
-//   })
-//
-//   connection.end();
-//
-// }
 
 // Create a new user entry in the database using a JSON file conisting of thier submited details.
 function addUserToDatabase(user){
