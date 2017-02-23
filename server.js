@@ -35,7 +35,7 @@ app.get("/user", function(req,res){
     console.log("Requested user: " + req.session.loginid);
     res.status(200).send(req.session.loginid);
   }
-})
+});
 
 /*
   If there's an active and valid login session then the website will return additonal infomation to the session
@@ -96,6 +96,17 @@ app.post("/user/register", function(req,res){
   res.end("done")
 })
 
+//Test database
+function databaseTestData(){
+  var connection = mysql.createConnection(sqlLogin);
+  connection.connect();
+  var data = {fName: 'Bob', lName: 'Ross', dob: '2017/02/23', address: 'an address', email: 'something@something.com', phoneNum: '15468754', password: '12345'};
+  var query = connection.query('INSERT INTO posts SET ?', data, function(err, result){
+  // Success!
+  });
+  console.log(query.sql); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
+}
+
 // Create a new user entry in the database using a JSON file conisting of thier submited details.
 function addUserToDatabase(user){
   var connection = mysql.createConnection(sqlLogin);
@@ -113,4 +124,5 @@ function addUserToDatabase(user){
   connection.end();
 }
 
+databaseTestData();
 app.listen(8080);

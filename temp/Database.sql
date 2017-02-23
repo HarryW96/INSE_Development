@@ -1,4 +1,6 @@
-CREATE TABLE User(
+create database if not exists bookit;
+
+create table if not exists bookit.user(
   U_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   fName VARCHAR(20) NOT NULL,
   lName VARCHAR(20) NOT NULL,
@@ -10,7 +12,7 @@ CREATE TABLE User(
   UNIQUE(email)
 );
 
-CREATE TABLE Event(
+create table if not exists bookit.event(
   E_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   NAME VARCHAR(40) NOT NULL,
   Host_ID INT NOT NULL,
@@ -21,7 +23,7 @@ CREATE TABLE Event(
   Image VARCHAR(45) NOT NULL,
 );
 
-CREATE TABLE UserEvent(
+create table if not exists bookit.userEvent(
   U_ID INT NOT NULL,
   E_ID INT NOT NULL,
   FOREIGN KEY (U_ID)
