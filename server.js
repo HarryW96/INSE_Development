@@ -30,9 +30,9 @@ app.get("/user", function(req,res){
     console.log(req.session.loginid);
   if(req.session.loginid == null){
     res.status(401).send();
+  }
   else{
     console.log("Requested user: " + req.session.loginid);
-  }
     res.status(200).send(req.session.loginid);
   }
 })
@@ -67,8 +67,8 @@ app.get("/user/logout", function(req,res){
 });
 
 //Check login details for when user logs in first time
+//TODO Change to GET instead of POST
 app.post("/user", function(req,res){
-  //checkUserLogin(req.body, req.session);
   var connection = mysql.createConnection(sqlLogin);
   connection.query("SELECT * FROM `user` WHERE `Name` = ?",[req.body.name], function(err,results,fields){
     if(results.length == 0){
@@ -91,8 +91,8 @@ app.post("/user", function(req,res){
 //Register a new user
 app.post("/user/register", function(req,res){
   addUserToDatabase(req.body);
-  res.send(req.body.name + " was registered sucessfully.");
-  console.log(req.body.name + " was registered sucessfully.");
+  res.send(req.body.fName + " was registered sucessfully.");
+  console.log(req.body.fName + " was registered sucessfully.");
   res.end("done")
 })
 
@@ -100,7 +100,14 @@ app.post("/user/register", function(req,res){
 function addUserToDatabase(user){
   var connection = mysql.createConnection(sqlLogin);
   connection.connect();
-  connection.query("INSERT INTO user SET ?", {Name: user.name, Email: user.email,Phone: user.phone, Password: user.pass}, function(err,result){
+  connection.query("INSERT INTO user SET ?", {
+    fName: user.fName,
+    lName: user.lName,
+    dob: user.date,
+    address: user.address,
+    email: user.email,
+    phoneNum: user.phone,
+    password: user.pass}, function(err,result){
     if (err) throw err;
   });
   connection.end();

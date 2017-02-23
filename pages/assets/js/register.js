@@ -3,22 +3,31 @@ var xhr = new XMLHttpRequest();
 // Gets the user details and applies validation on them.
 // If valid will pass data to the server to register the user.
 function registerUser(){
-  var name = document.getElementById("reg-name");
-  var email = document.getElementById("reg-email");
-  var phone = document.getElementById("reg-phone");
-  var pass = document.getElementById("reg-pass");
-  var passCheck = document.getElementById("reg-passcheck");
-  var user = { name: name.value, email:email.value,phone:phone.value, pass:pass.value, passcheck:passCheck.value}
+  console.log("Reg started");
+  var fName = document.getElementById("reg-fname").value;
+  var lName = document.getElementById("reg-lname").value;
+  var date = document.getElementById("reg-date").value;
+  var address = document.getElementById("reg-address").value;
+  var city = document.getElementById("reg-city").value;
+  var postcode = document.getElementById("reg-postcode").value;
+  var email = document.getElementById("reg-email").value;
+  var phone = document.getElementById("reg-phone").value;
+  var pass = document.getElementById("reg-pass").value;
+  var passCheck = document.getElementById("reg-passcheck").value;
 
-  if(pass.value == "" || passCheck.value == "" || name.value == "" || email.value == "" || phone.value == ""){
+
+  if(pass == "" || passCheck == "" || fName == "" || lName == "" || date == "" || address == "" || city == "" || postcode == "" || email == "" || phone == ""){
     alert("Please fill all fields");
+    pass = "";
+    passCheck = "";
   }
-  else if(pass.value != passCheck.value){
+  else if(pass != passCheck){
     alert("Passwords do not match");
-    pass.value = "";
-    passCheck.value = "";
+    pass = "";
+    passCheck = "";
   }
   else{
+    var user = { "fName": fName,"lName": lName, "date": date, "address": address, "city": city, "postcode": postcode, "email": email, "phone": phone, "pass": pass, "passcheck": passCheck}
     console.log("Started send process");
     xhr.open("POST", "/user/register");
     xhr.setRequestHeader("Content-Type", "application/json");
