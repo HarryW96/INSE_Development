@@ -33,7 +33,7 @@ app.get("/user", function(req,res){
   }
   else{
     console.log("Requested user: " + req.session.login_fName);
-    res.status(200).send(req.session.login_fName + "is logged in.");
+    res.status(200).send(req.session.login_fName);
   }
 });
 
@@ -79,11 +79,11 @@ app.post("/user/login", function(req, res){
         console.log("User " + req.body.fName + " sucessfully logged in!");
         req.session.login_id = results[i].U_ID;
         req.session.login_fName = results[i].fName; //TODO loginid should be changed to loginName but as to not break other code
-        req.session.login_phone = results[i].phone;
+        req.session.login_phone = results[i].phoneNum;
         req.session.login_email = results[i].email;
-        console.log("User " + req.session.fName + " just logged in.");
+        console.log("User " + req.session.login_fName + " just logged in.");
         connection.end();
-        res.send("Welcome " + req.session.fName);
+        res.send("Welcome " + req.session.login_fName);
       }
     }
   });
@@ -151,6 +151,5 @@ function addUserToDatabase(user){
   connection.end();
 }
 
-databaseTestData();
 databaseEventTestData();
 app.listen(8080);
