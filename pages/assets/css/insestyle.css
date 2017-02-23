@@ -64,10 +64,6 @@
     background-color: #191919;
 }
 
-.top-bar-right .button {
-    margin-right: 2rem;
-}
-
 .top-bar .button {
     background-color: #191919;
 }
@@ -325,6 +321,29 @@
     #event_locations span {
         padding-left: 5rem;
     }
+}
+ /*Search Results Styling*/
+ #event-img img{
+   float: right;
+   padding-right: 2rem;
+ }
+
+#title-desc{
+  padding-right: 8rem;
+}
+
+#title-desc h3{
+  padding-top: 1rem;
+}
+
+.search-result{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+#searched{
+  padding-top: 1.5rem;
+  padding-left: 1.5rem;
 }
 
 #space-filler {
