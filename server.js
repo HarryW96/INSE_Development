@@ -92,8 +92,8 @@ app.post("/user/login", function(req, res){
 //Register a new user
 app.post("/user/register", function(req,res){
   addUserToDatabase(req.body);
-  res.send(req.body.name + " was registered sucessfully.");
-  console.log(req.body.name + " was registered sucessfully.");
+  res.send(req.body.email + " was registered sucessfully.");
+  console.log(req.body.email + " was registered sucessfully.");
   res.end("done")
 })
 
@@ -117,7 +117,7 @@ function databaseEventTestData(){
   });
   console.log(query.sql);
 }
-
+// NOTE Breaks on running. Prehaps the first paramater of "connection.query" needs to be a string?
 // function search(){
 //   var connection = mysql.createConnection(sqlLogin);
 //   var searchQuery = document.getElementById('search-bar').textContent;
@@ -143,9 +143,9 @@ function addUserToDatabase(user){
   });
   connection.end();
 }
-
-var searchButton = document.getElementById('searchButton');
-searchButton.addEventListener("click", search, false);
+//NOTE This is clientside code. Why is it here?
+// var searchButton = document.getElementById('searchButton');
+// searchButton.addEventListener("click", search, false);
 
 databaseEventTestData();
 app.listen(8080);
