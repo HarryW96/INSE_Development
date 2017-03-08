@@ -105,7 +105,7 @@ function databaseUserTestData(){
   var query = connection.query('INSERT INTO user SET ?', data, function(err, result){
   // Success!
   });
-  console.log(query.sql); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
+  console.log(query.sql);
 }
 
 function databaseEventTestData(){
@@ -127,7 +127,7 @@ function databaseEventTestData(){
 //     });
 // };
 
-// Create a new user entry in the database using a JSON file conisting of thier submited details.
+// Create a new user entry in the database using a JSON file consisting of thier submited details.
 function addUserToDatabase(user){
   var connection = mysql.createConnection(sqlLogin);
   connection.connect();
