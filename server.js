@@ -17,7 +17,8 @@ var storage = multer.diskStorage({
   }
 });
 
-var upload = multer({storage: storage}).single("profile");
+var upload = multer({dest: "./uploads/profile/"});
+
 
 // TODO Replace login details with proper bookit database. Thx adam :)
 var sqlLogin = {
@@ -30,7 +31,7 @@ var sqlLogin = {
 //Initalization
 app.use(express.static(__dirname + "/pages"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
+//app.use(bodyParser.urlencoded({extended:true}));
 app.use(session({
   secret: 'nurf this',
   resave: false,
@@ -53,7 +54,6 @@ app.get("/user", function(req,res){
     res.status(200).send(req.session.login_fName);
   }
 });
-
 /*
   If there's an active and valid login session then the website will return additonal infomation to the session
 */
@@ -122,18 +122,10 @@ app.get("/user/img", function(req, res){
   })
 });
 
-app.post("/user/img", function(req, res){
-  upload(req,res, function(err){
-    if(err){
-      console.log("ERROR! on IMG POST");
-      return;
-    }
-    console.log(req.file);
-    res.send("File uploaded!");
-    console.log("Photo Uploaded!");
-  })
-  res.send(req.files);
-})
+app.post("/user/img", upload.single("profile"), function(req, res, next){
+  console.log(req.file);
+  res.send(req.file);
+});
 
 //Register a new user
 app.post("/user/register", function(req,res){
@@ -192,5 +184,5 @@ function addUserToDatabase(user){
   connection.end();
 }
 
-databaseEventTestData();
+//databaseEventTestData();
 app.listen(8080);
