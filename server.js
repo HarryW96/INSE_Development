@@ -5,6 +5,7 @@ var app = express();
 var bodyParser = require("body-parser");
 // Database and MySQL
 var mysql = require("mysql");
+var fs = require("fs");
 // TODO Replace login details with proper bookit database. Thx adam :)
 var sqlLogin = {
   host: "localhost",
