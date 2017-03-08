@@ -5,6 +5,7 @@ var app = express();
 var bodyParser = require("body-parser");
 // Database and MySQL
 var mysql = require("mysql");
+var fs = require("fs");
 // TODO Replace login details with proper bookit database. Thx adam :)
 var sqlLogin = {
   host: "localhost",
@@ -89,6 +90,22 @@ app.post("/user/login", function(req, res){
       }
     }
   });
+});
+
+app.get("/user/img", function(req, res){
+  var connection = mysql.createConnection(sqlLogin); //Establish connection to database
+  connection.query("SELECT * FROM `user` WHERE `email` = ?",[req.session.login_email], function(err, results, fields){
+    if(imageURL == null || results[0] == undefined){
+      res.status(404).send("Profile picture not found");
+      connection.end();
+    }
+    else{
+      var imageURL = results.profile_ref;
+      connection.end();
+      console.log(__dirname + "/content/profile/" + imageURL);
+      res.sendFile(__dirname + "/content/profile/" + imageURL);
+    }
+  })
 });
 
 //Register a new user
