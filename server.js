@@ -6,6 +6,19 @@ var bodyParser = require("body-parser");
 // Database and MySQL
 var mysql = require("mysql");
 var fs = require("fs");
+var multer = require("multer");
+var storage = multer.diskStorage({
+  destination: function (request, file, callback) {
+    callback(null, '/example/uploads');
+  },
+  filename: function (request, file, callback) {
+    console.log(file);
+    callback(null, file.originalname)
+  }
+});
+
+var upload = multer({storage: storage}).single("profile");
+
 // TODO Replace login details with proper bookit database. Thx adam :)
 var sqlLogin = {
   host: "localhost",
@@ -24,6 +37,7 @@ app.use(session({
   saveUninitialized: true,
   //cookie: {secure:true}
 }));
+
 //Code Body
 
 /*-------------------- REST Functions --------------------------- */
@@ -108,6 +122,19 @@ app.get("/user/img", function(req, res){
   })
 });
 
+app.post("/user/img", function(req, res){
+  upload(req,res, function(err){
+    if(err){
+      console.log("ERROR! on IMG POST");
+      return;
+    }
+    console.log(req.file);
+    res.send("File uploaded!");
+    console.log("Photo Uploaded!");
+  })
+  res.send(req.files);
+})
+
 //Register a new user
 app.post("/user/register", function(req,res){
   addUserToDatabase(req.body);
@@ -119,25 +146,25 @@ app.post("/user/register", function(req,res){
 /* ------------------------Test Functions------------------------------------ */
 
 //Test database
-function databaseUserTestData(){
-  var connection = mysql.createConnection(sqlLogin);
-  connection.connect();
-  var data = {fName: 'Bob', lName: 'Ross', dob: '2017/02/23', address: 'an address', email: 'something@something.com', phoneNum: '15468754', password: '12345'};
-  var query = connection.query('INSERT INTO user SET ?', data, function(err, result){
-  // Success!
-  });
-  console.log(query.sql);
-}
-
-function databaseEventTestData(){
-  var connection = mysql.createConnection(sqlLogin);
-  connection.connect();
-  var data = {event_Name: "ut massa quis augue luctus", eDate:"2016-03-27", location:"Ngluweng Dua", capacity:3966, descrp:"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi."};
-  var query = connection.query('INSERT INTO event SET ?', data, function(err, result){
-  // Success!
-  });
-  console.log(query.sql);
-}
+// function databaseUserTestData(){
+//   var connection = mysql.createConnection(sqlLogin);
+//   connection.connect();
+//   var data = {fName: 'Bob', lName: 'Ross', dob: '2017/02/23', address: 'an address', email: 'something@something.com', phoneNum: '15468754', password: '12345'};
+//   var query = connection.query('INSERT INTO user SET ?', data, function(err, result){
+//   // Success!
+//   });
+//   console.log(query.sql);
+// }
+//
+// function databaseEventTestData(){
+//   var connection = mysql.createConnection(sqlLogin);
+//   connection.connect();
+//   var data = {event_Name: "ut massa quis augue luctus", eDate:"2016-03-27", location:"Ngluweng Dua", capacity:3966, descrp:"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi."};
+//   var query = connection.query('INSERT INTO event SET ?', data, function(err, result){
+//   // Success!
+//   });
+//   console.log(query.sql);
+// }
 //NOTE Breaks on running. Prehaps the first paramater of "connection.query" needs to be a string?
 //function search(){
  //var connection = mysql.createConnection(sqlLogin);
