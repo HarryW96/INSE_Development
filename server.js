@@ -91,6 +91,18 @@ app.post("/user/login", function(req, res){
   });
 });
 
+app.get("/user/img", function(req, res){
+  var connection = mysql.createConnection(sqlLogin); //Establish connection to database
+  connection.query("SELECT * FROM `user` WHERE `email` = ?",[req.query.email], function(err, results, fields){
+    var imageURL = results[0].profile_ref;
+
+
+    connection.end();
+    res.send(imageURL);
+  })
+
+});
+
 //Register a new user
 app.post("/user/register", function(req,res){
   addUserToDatabase(req.body);
