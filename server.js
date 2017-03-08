@@ -25,6 +25,8 @@ app.use(session({
 }));
 //Code Body
 
+/*-------------------- REST Functions --------------------------- */
+
 //Checks if there's a currently logged in user and sends back what user is logged in.
 app.get("/user", function(req,res){
     console.log(req.session.login_id);
@@ -96,6 +98,8 @@ app.post("/user/register", function(req,res){
   console.log(req.body.email + " was registered sucessfully.");
   res.end("done")
 })
+
+/* ------------------------Test Functions------------------------------------ */
 
 //Test database
 function databaseUserTestData(){
