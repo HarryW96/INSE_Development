@@ -121,15 +121,15 @@ function databaseEventTestData(){
   });
   console.log(query.sql);
 }
-// NOTE Breaks on running. Prehaps the first paramater of "connection.query" needs to be a string?
-// function search(){
-//   var connection = mysql.createConnection(sqlLogin);
-//   var searchQuery = document.getElementById('search-bar').textContent;
-//   connection.query(SELECT * FROM event WHERE event_Name LIKE %searchQuery%,
-//     function(err, result){
-//       if (err) throw err;
-//     });
-// };
+//NOTE Breaks on running. Prehaps the first paramater of "connection.query" needs to be a string?
+//function search(){
+ //var connection = mysql.createConnection(sqlLogin);
+ //var searchQuery = document.getElementById('search-bar').textContent;
+ //connection.query("SELECT * FROM event WHERE event_Name LIKE %searchQuery%",
+   //function(err, result){
+     //if (err) throw err;
+   //});
+//};
 
 // Create a new user entry in the database using a JSON file consisting of thier submited details.
 function addUserToDatabase(user){
@@ -147,9 +147,6 @@ function addUserToDatabase(user){
   });
   connection.end();
 }
-//NOTE This is clientside code. Why is it here?
-// var searchButton = document.getElementById('searchButton');
-// searchButton.addEventListener("click", search, false);
 
 databaseEventTestData();
 app.listen(8080);
