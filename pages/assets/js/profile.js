@@ -32,4 +32,27 @@ function getUserProfile(){
   xhr.send(null);
 }
 
+function getUserImage(){
+  var profile_image = document.getElementById('profile_image');
+
+  xhr.open("GET", "/user/img");
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState == XMLHttpRequest.DONE){
+      console.log("Ready!");
+      
+      if(xhr.status == 404){
+        console.log("No image here bruh");
+      }
+
+      else(xhr.status == 200){
+        console.log("Ready to update image!");
+        var imageSource = JSON.parse(xhr.responseText);
+
+        profile_image.setAttribute("src", imageSource);
+      }
+    }
+  }
+  xhr.send(null);
+}
+
 window.addEventListener("load", getUserProfile);

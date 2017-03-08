@@ -1,6 +1,6 @@
 var xhr = new XMLHttpRequest();
 
-function getEventDetails(){
+function getEvent(){
   var eventHeading = document.getElementById("event_heading");
   var eventImage = document.getElementById("event_image");
   var eventDesc = document.getElementById("event_description");
