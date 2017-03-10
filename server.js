@@ -30,8 +30,8 @@ var sqlLogin = {
 
 //Initalization
 app.use(express.static(__dirname + "/pages"));
-app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({extended:true, limit: '50mb'}));
 app.use(session({
   secret: 'nurf this',
   resave: false,
@@ -106,6 +106,14 @@ app.post("/user/login", function(req, res){
   });
 });
 
+//Register a new user
+app.post("/user/register", function(req, res){
+  addUserToDatabase(req.body);
+  res.send(req.body.email + " was registered sucessfully.");
+  console.log(req.body.email + " was registered sucessfully.");
+  res.end("done")
+});
+// Gets a users image via email
 app.get("/user/img", function(req, res){
   var connection = mysql.createConnection(sqlLogin); //Establish connection to database
   connection.query("SELECT * FROM `user` WHERE `email` = ?",[req.session.login_email], function(err, results, fields){
@@ -121,19 +129,29 @@ app.get("/user/img", function(req, res){
     }
   })
 });
-
+/*
+  POST: Inserts an image into /uploads/profile/
+  USAGE: Post image and query at /user/img/?q=<EMAIL GOES HERE>
+  To be used in sync with GET "/user/img" to allow client to request images via their email
+*/
 app.post("/user/img", upload.single("profile"), function(req, res, next){
-  console.log(req.file);
-  res.send(req.file);
+  if(req.file == undefined){
+    res.status(404).send("No file attached!")
+    return next();
+  }
+  if(req.query.q == undefined){
+    res.status(404).send("No email query in request!");
+    return next();
+  }
+  // Change multer filename to uploaded name
+  fs.rename(__dirname + "/uploads/profile/" + req.file.filename, __dirname + "/uploads/profile/" + req.file.originalname);
+  // Update user's reference to profile img
+  var connection = mysql.createConnection(sqlLogin);
+  connection.query("UPDATE user SET profile_ref = ? WHERE email = ?", [req.file.originalname, req.query.q])
+  res.status(200).send(req.file.originalname + " posted and linked to " + req.query.q);
 });
 
-//Register a new user
-app.post("/user/register", function(req,res){
-  addUserToDatabase(req.body);
-  res.send(req.body.email + " was registered sucessfully.");
-  console.log(req.body.email + " was registered sucessfully.");
-  res.end("done")
-})
+
 
 /* ------------------------Test Functions------------------------------------ */
 
