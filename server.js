@@ -150,6 +150,32 @@ app.post("/user/img", upload.single("profile"), function(req, res, next){
   connection.query("UPDATE user SET profile_ref = ? WHERE email = ?", [req.file.originalname, req.query.q])
   res.status(200).send(req.file.originalname + " posted and linked to " + req.query.q);
 });
+/*
+  GET: Gets event details from the event table
+  USAGE:
+    eventSearch: search for a event by its name. Returns Max 5 results
+    eventID: Gets a single event via it's ID
+*/
+app.get("/event", function(req, res, next){
+  var connection = mysql.createConnection(sqlLogin);
+  if(req.query.eventSearch != undefined){
+    connection.query("SELECT * FROM `event` WHERE `event_Name` LIKE ? LIMIT 5", ["%" + req.query.eventSearch + "%"], function(err, results, fields){
+      res.send(results);
+      return next();
+    });
+  }
+  else if(req.query.eventID != undefined){
+    connection.query("SELECT * FROM `event` WHERE E_ID = ?", [req.query.eventID], function(err,results, fields){
+      res.send(results);
+      return next();
+    });
+  }
+  else{
+    res.status(400).send("No query!!");
+    return next();
+  }
+
+});
 
 
 
