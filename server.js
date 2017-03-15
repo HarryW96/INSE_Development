@@ -47,7 +47,7 @@ app.use(session({
 app.get("/user", function(req,res){
     //console.log(req.session.login_id);
   if(req.session.login_id == null){
-    res.status(401).send();
+    res.status(401).send("No user logged in.");
   }
   else{
     console.log("Requested user logged : " + req.session.login_fName);
@@ -88,7 +88,7 @@ app.post("/user/login", function(req, res){
   var connection = mysql.createConnection(sqlLogin);
   console.log(req.body.name);
   connection.query("SELECT * FROM `user` WHERE `email` = ?",[req.body.name], function(err,results,fields){
-    if(results.length == 0){
+    if( results == undefined || results.length == 0 ){
       return res.status(404).send("ERROR: NO USER FOUND!");
     }
     for(i = 0;i < results.length;i++){
@@ -115,6 +115,7 @@ app.post("/user/register", function(req, res){
 });
 // Gets a users image via email
 app.get("/user/img", function(req, res){
+  console.log(req.session.login_email);
   var connection = mysql.createConnection(sqlLogin); //Establish connection to database
   connection.query("SELECT * FROM `user` WHERE `email` = ?",[req.session.login_email], function(err, results, fields){
     if(imageURL == null || results[0] == undefined){
