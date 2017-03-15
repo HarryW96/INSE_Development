@@ -12,7 +12,7 @@ var storage = multer.diskStorage({
     callback(null, '/example/uploads');
   },
   filename: function (request, file, callback) {
-    console.log(file);
+    //console.log(file);
     callback(null, file.originalname)
   }
 });
@@ -45,12 +45,12 @@ app.use(session({
 
 //Checks if there's a currently logged in user and sends back what user is logged in.
 app.get("/user", function(req,res){
-    console.log(req.session.login_id);
+    //console.log(req.session.login_id);
   if(req.session.login_id == null){
     res.status(401).send();
   }
   else{
-    console.log("Requested user: " + req.session.login_fName);
+    console.log("Requested user logged : " + req.session.login_fName);
     res.status(200).send(req.session.login_fName);
   }
 });
@@ -155,6 +155,7 @@ app.post("/user/img", upload.single("profile"), function(req, res, next){
   USAGE:
     eventSearch: search for a event by its name. Returns Max 5 results
     eventID: Gets a single event via it's ID
+    NOTE for the time being, add a new event via the database.
 */
 app.get("/event", function(req, res, next){
   var connection = mysql.createConnection(sqlLogin);

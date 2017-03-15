@@ -3,7 +3,7 @@ var xhr = new XMLHttpRequest();
 // Gets the user details and applies validation on them.
 // If valid will pass data to the server to register the user.
 function registerUser(){
-  console.log("Reg started");
+  //console.log("Reg started");
   var fName = document.getElementById("reg-fname").value;
   var lName = document.getElementById("reg-lname").value;
   var date = document.getElementById("reg-date").value;
@@ -38,7 +38,7 @@ function registerUser(){
     "phone": phone,
     "pass": pass,
     "passCheck": passCheck}
-    console.log("Started send process");
+    //console.log("Started send process");
     xhr.open("POST", "/user/register");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(user));

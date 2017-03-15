@@ -11,7 +11,7 @@ function loginCheck(){
       alert(xhr.responseText); //Login session is stablished via hidden cookie data. Setup server-side automaticlly.
     }
   }
-  console.log(userDetails);
+  //console.log(userDetails);
   xhr.send(JSON.stringify(userDetails));
 }
 

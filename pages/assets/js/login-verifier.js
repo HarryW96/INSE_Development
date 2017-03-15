@@ -2,7 +2,7 @@
 function getLoginDetails(){
   var xhr = new XMLHttpRequest();
   var loginEle = document.getElementById("user-display");
-  console.log("Getting user detials");
+  //console.log("Getting user detials");
   xhr.open("GET", "/user");
   xhr.onreadystatechange = function(){
     if(xhr.readyState = XMLHttpRequest.DONE){
