@@ -74,7 +74,7 @@ app.get("/user/detail", function(req,res){
   Destroys the current session of the active user and returns an error message if there's no user
 */
 app.get("/user/logout", function(req,res){
-  if(req.session.loginid == null){
+  if(req.session.login_id == null){
     res.status(200).send("No user logged in.");
   }
   else{
@@ -175,7 +175,6 @@ app.get("/event", function(req, res, next){
     res.status(400).send("No query!!");
     return next();
   }
-
 });
 
 
