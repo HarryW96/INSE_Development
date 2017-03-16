@@ -113,6 +113,7 @@ app.post("/user/register", function(req, res){
   console.log(req.body.email + " was registered sucessfully.");
   res.end("done")
 });
+
 // Gets a users image via email
 app.get("/user/img", function(req, res){
   console.log(req.session.login_email);
