@@ -75,7 +75,7 @@ app.get("/user/detail", function(req,res){
 */
 app.get("/user/logout", function(req,res){
   if(req.session.login_id == null){
-    res.status(200).send("No user logged in.");
+    res.status(400).send("No user logged in.");
   }
   else{
     req.session.destroy();
@@ -157,7 +157,7 @@ app.post("/user/img", upload.single("profile"), function(req, res, next){
   USAGE:
     eventSearch: search for a event by its name. Returns Max 5 results
     eventID: Gets a single event via it's ID
-    NOTE for the time being, add a new event via the database.
+    NOTE for the time being, the only way to add a new event is via the database
 */
 app.get("/event", function(req, res, next){
   var connection = mysql.createConnection(sqlLogin);
@@ -179,6 +179,22 @@ app.get("/event", function(req, res, next){
   }
 });
 
+// Create a new user entry in the database using a JSON file consisting of thier submited details.
+function addUserToDatabase(user){
+  var connection = mysql.createConnection(sqlLogin);
+  connection.connect();
+  connection.query("INSERT INTO user SET ?", {
+    fName: user.fName,
+    lName: user.lName,
+    dob: user.date,
+    address: user.address,
+    email: user.email,
+    phoneNum: user.phone,
+    password: user.pass}, function(err,result){
+    if (err) throw err;
+  });
+  connection.end();
+}
 
 
 /* ------------------------Test Functions------------------------------------ */
@@ -213,22 +229,4 @@ app.get("/event", function(req, res, next){
    //});
 //};
 
-// Create a new user entry in the database using a JSON file consisting of thier submited details.
-function addUserToDatabase(user){
-  var connection = mysql.createConnection(sqlLogin);
-  connection.connect();
-  connection.query("INSERT INTO user SET ?", {
-    fName: user.fName,
-    lName: user.lName,
-    dob: user.date,
-    address: user.address,
-    email: user.email,
-    phoneNum: user.phone,
-    password: user.pass}, function(err,result){
-    if (err) throw err;
-  });
-  connection.end();
-}
-
-//databaseEventTestData();
 app.listen(8080);
