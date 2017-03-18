@@ -338,13 +338,13 @@
     }
 }
  /*Search Results Styling*/
- #event-img img{
-   float: right;
-   padding-right: 2rem;
- }
+#event-img img{
+  float: right;
+  padding-right: 2rem;
+}
 
 #title-desc{
-  padding-right: 8rem;
+  padding-right: 14rem;
 }
 
 #title-desc h3{

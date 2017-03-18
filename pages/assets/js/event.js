@@ -36,5 +36,4 @@ function getEventPage(){
   xhr.send(null);
 }
 
-
 window.addEventListener("load", getEventPage)
