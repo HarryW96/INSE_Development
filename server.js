@@ -1,12 +1,13 @@
 // Express and AJAX
 var express = require("express");
 var session = require("express-session");
-var app = express();
+var multer = require("multer");
 var bodyParser = require("body-parser");
-// Database and MySQL
 var mysql = require("mysql");
 var fs = require("fs");
-var multer = require("multer");
+var login = require("./login");
+
+// TODO See if this can be removed?
 var storage = multer.diskStorage({
   destination: function (request, file, callback) {
     callback(null, '/example/uploads');
@@ -16,17 +17,16 @@ var storage = multer.diskStorage({
     callback(null, file.originalname)
   }
 });
-
+// Assign instnace of express
+var app = express();
+// Create instance of multer
 var upload = multer({dest: "./uploads/profile/"});
 
+// Import mysql details from external source.
+var sqlLogin = login.sqlLogin;
 
 // TODO Replace login details with proper bookit database. Thx adam :)
-var sqlLogin = {
-  host: "localhost",
-  user: "bookit",
-  password: "1234",
-  database: "bookit"
-};
+
 
 //Initalization
 app.use(express.static(__dirname + "/pages"));
