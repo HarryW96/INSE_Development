@@ -6,27 +6,11 @@ var bodyParser = require("body-parser");
 var mysql = require("mysql");
 var fs = require("fs");
 var login = require("./login");
-
-// TODO See if this can be removed?
-var storage = multer.diskStorage({
-  destination: function (request, file, callback) {
-    callback(null, '/example/uploads');
-  },
-  filename: function (request, file, callback) {
-    //console.log(file);
-    callback(null, file.originalname)
-  }
-});
-// Assign instnace of express
 var app = express();
-// Create instance of multer
 var upload = multer({dest: "./uploads/profile/"});
 
 // Import mysql details from external source.
 var sqlLogin = login.sqlLogin;
-
-// TODO Replace login details with proper bookit database. Thx adam :)
-
 
 //Initalization
 app.use(express.static(__dirname + "/pages"));
@@ -39,7 +23,6 @@ app.use(session({
   //cookie: {secure:true}
 }));
 
-//Code Body
 
 /*-------------------- REST Functions --------------------------- */
 

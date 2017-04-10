@@ -8,12 +8,14 @@ function getEventPage(){
   var locationEle = document.getElementById("event_location");
   var imageEle = document.getElementById("event_image_selector");
   var eventID = window.location.search.substring(1);
+  console.log(eventID);
 
-  xhr.open("GET", "/event?eventID=" + eventID);
+  xhr.open("GET", "/event?" + eventID);
   xhr.onreadystatechange = function(){
     if(xhr.readyState == XMLHttpRequest.DONE){
       if(xhr.status == 200){ // Populate elements if valid
         var profileData = JSON.parse(xhr.responseText)[0]
+        console.log(profileData);
         titleEle.innerText = profileData.event_Name;
         descrpEle.innerText = profileData.descrp;
         capacityEle.innerText = profileData.capacity;
