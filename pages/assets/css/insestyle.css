@@ -351,12 +351,12 @@
   padding-top: 1rem;
 }
 
-.search-result{
+#search-result{
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
-#searched{
+#searched-for{
   padding-top: 1.5rem;
   padding-left: 1.5rem;
 }
