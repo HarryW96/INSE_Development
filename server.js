@@ -5,23 +5,22 @@ var multer = require("multer");
 var bodyParser = require("body-parser");
 var mysql = require("mysql");
 var fs = require("fs");
-var login = require("./login");
+var sqlLogin = require("./SQLAuth").sqlLogin;
 var app = express();
 var upload = multer({dest: "./uploads/profile/"});
-
-// Import mysql details from external source.
-var sqlLogin = login.sqlLogin;
 
 //Initalization
 app.use(express.static(__dirname + "/pages"));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({extended:true, limit: '50mb'}));
 app.use(session({
-  secret: 'nurf this',
+  secret: 'nurf this', // Encrption key TODO Concider storing seperate from main project
   resave: false,
   saveUninitialized: true,
   //cookie: {secure:true}
 }));
+
+
 
 
 /*-------------------- REST Functions --------------------------- */
@@ -178,38 +177,29 @@ function addUserToDatabase(user){
   });
   connection.end();
 }
+// Check to see if valid database exists
+function checkDatabase(){
+  var connection = mysql.createConnection(sqlLogin);
+  connection.connect(function(err){
+    if(err){
+      console.log("Database connection failed.");
+      console.log("Troubleshoot:")
+      console.log("1) Check your SQLAuth.js file.")
+      console.log("2) Ensure a local database exists.");
+      console.log("3) Check to see if the server has access. I.e create a bookit user.");
+      console.log("4) Ensure fields are valid.");
+      console.log("5) Ensure system allows node to access database.");
+      process.exit();
+    }
+    else{
+      console.log("Database connection established");
+    }
+  });
+  connection.end();
+}
 
-
-/* ------------------------Test Functions------------------------------------ */
-
-//Test database
-// function databaseUserTestData(){
-//   var connection = mysql.createConnection(sqlLogin);
-//   connection.connect();
-//   var data = {fName: 'Bob', lName: 'Ross', dob: '2017/02/23', address: 'an address', email: 'something@something.com', phoneNum: '15468754', password: '12345'};
-//   var query = connection.query('INSERT INTO user SET ?', data, function(err, result){
-//   // Success!
-//   });
-//   console.log(query.sql);
-// }
-//
-// function databaseEventTestData(){
-//   var connection = mysql.createConnection(sqlLogin);
-//   connection.connect();
-//   var data = {event_Name: "ut massa quis augue luctus", eDate:"2016-03-27", location:"Ngluweng Dua", capacity:3966, descrp:"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi."};
-//   var query = connection.query('INSERT INTO event SET ?', data, function(err, result){
-//   // Success!
-//   });
-//   console.log(query.sql);
-// }
-//NOTE Breaks on running. Prehaps the first paramater of "connection.query" needs to be a string?
-//function search(){
- //var connection = mysql.createConnection(sqlLogin);
- //var searchQuery = document.getElementById('search-bar').textContent;
- //connection.query("SELECT * FROM event WHERE event_Name LIKE %searchQuery%",
-   //function(err, result){
-     //if (err) throw err;
-   //});
-//};
-
-app.listen(8080);
+app.listen(8080, function(){
+  console.log("Server started");
+  console.log("");
+  checkDatabase();
+});
