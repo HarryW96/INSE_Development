@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookit Header Footer</title>
+    <title>Event Search</title>
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="assets/css/insestyle.css">
     <script src="https://use.fontawesome.com/22eceefc05.js"></script>
@@ -39,7 +39,7 @@
                 <ul class="menu">
                     <li><input class="show-for-medium" type="search" placeholder="Search" id="search-large"></li>
                     <li><button type="button" class="button show-for-medium" id="search-button">Go!</button></li>
-                    <li><a href="login.html"><i class="fa fa-user fa-2x show-for-medium" aria-hidden="true"></i></a></li>
+                    <li><button onclick="window.location.href='/profile.html'" type="button" class="button show-for-medium" id="user-display"></button></li>
                 </ul>
             </div>
         </div>
@@ -58,7 +58,7 @@
         <!--Page Content-->
         <div class="row">
           <div class="large-12 columns" id="searched-for">
-            <h2>Showing results for: <span id="searched">"Thing searched for"</span></h2>
+            <h2>Showing results for: <span id="searched">Alphabetically sorted</span></h2>
           </div>
         </div>
 
@@ -81,6 +81,7 @@
             <div class="large-6 columns" id="title-desc">
                 <h3 id="search-title2">loading...</h3>
                 <p id="search-desc2">loading...</p>
+
             </div>
         </div>
 

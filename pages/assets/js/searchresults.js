@@ -36,9 +36,17 @@ function getSearchResults(){
         var eventJSON = xhr.responseText;
         var eventData = JSON.parse(xhr.responseText);
 
+
+
       if(eventData != null){
 
-        searchDisplay.innerText = eventSearch;
+        if(eventSearch == null || eventSearch == ""){
+          searchDisplay.innerText == "Alphabetically"
+        }
+        else{
+          searchDisplay.innerText = eventSearch;
+        }
+
 
         //first event shown
         if(eventData[0] != null){
