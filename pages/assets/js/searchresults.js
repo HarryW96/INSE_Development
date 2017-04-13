@@ -36,8 +36,6 @@ function getSearchResults(){
         var eventJSON = xhr.responseText;
         var eventData = JSON.parse(xhr.responseText);
 
-        console.log(eventJSON);
-
       if(eventData != null){
 
         searchDisplay.innerText = eventSearch;
@@ -222,13 +220,11 @@ function goToEvent(eventID){
 //
 function checkSearchBar(){
   var searchBar = document.getElementById("search-large").value;
-
-  if (searchBar != null){
+  if (searchBar != ""){
     getSearchResults();
     console.log("YES")
   }
-
-  else if (searchBar = null){
+  else{
     alert("Please enter a search query")
     console.log("NO");
   }
