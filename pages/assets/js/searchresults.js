@@ -3,20 +3,25 @@ var xhr = new XMLHttpRequest();
 function getSearchResults(){
 
   var eventSearch = document.getElementById("search-large").value;
-
   var searchDisplay = document.getElementById("searched");
+
+  var eventID1;
   var img1 = document.getElementById("event-img1");
   var title1 = document.getElementById("search-title1");
   var desc1 = document.getElementById("search-desc1");
+  var eventID2;
   var img2 = document.getElementById("event-img2");
   var title2 = document.getElementById("search-title2");
   var desc2 = document.getElementById("search-desc2");
+  var eventID3;
   var img3 = document.getElementById("event-img3");
   var title3 = document.getElementById("search-title3");
   var desc3 = document.getElementById("search-desc3");
+  var eventID4;
   var img4 = document.getElementById("event-img4");
   var title4 = document.getElementById("search-title4");
   var desc4 = document.getElementById("search-desc4");
+  var eventID5;
   var img5 = document.getElementById("event-img5");
   var title5 = document.getElementById("search-title5");
   var desc5 = document.getElementById("search-desc5");
@@ -47,6 +52,12 @@ function getSearchResults(){
 
           title1.innerText = eventData[0].event_Name;
           desc1.innerText = eventData[0].descrp;
+
+          eventID1 = eventData[0].E_ID;
+
+          title1.addEventListener("click", function(){
+            goToEvent(eventID1)
+          });
         }
 
         else if(eventData[0] = null){
@@ -67,6 +78,12 @@ function getSearchResults(){
 
           title2.innerText = eventData[1].event_Name;
           desc2.innerText = eventData[1].descrp;
+
+          eventID2 = eventData[1].E_ID;
+
+          title2.addEventListener("click", function(){
+            goToEvent(eventID2)
+          });
         }
 
         else if(eventData[1] = null){
@@ -88,6 +105,12 @@ function getSearchResults(){
 
           title3.innerText = eventData[2].event_Name;
           desc3.innerText = eventData[2].descrp;
+
+          eventID3 = eventData[2].E_ID;
+
+          title3.addEventListener("click", function(){
+            goToEvent(eventID3)
+          });
         }
 
         //remove if no data returned
@@ -109,6 +132,12 @@ function getSearchResults(){
 
           title4.innerText = eventData[3].event_Name;
           desc4.innerText = eventData[3].descrp;
+
+          eventID4 = eventData[3].E_ID;
+
+          title4.addEventListener("click", function(){
+            goToEvent(eventID4)
+          });
         }
 
         else if(eventData[3] = null){
@@ -130,6 +159,12 @@ function getSearchResults(){
 
           title5.innerText = eventData[4].event_Name;
           desc5.innerText = eventData[4].descrp;
+
+          eventID5 = eventData[4].E_ID;
+
+          title5.addEventListener("click", function(){
+            goToEvent(eventID5)
+          });
         }
 
         else if(eventData[4] = null){
@@ -175,4 +210,9 @@ function getSearchResults(){
   xhr.send(null);
 }
 
-window.addEventListener("load", getSearchResults)
+//function that should run on click event as seen above.
+function goToEvent(eventID){
+  window.location = "../event.html?eventID=" + eventID;
+}
+
+window.addEventListener("load", getSearchResults);
