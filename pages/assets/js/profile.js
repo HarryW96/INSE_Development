@@ -39,11 +39,9 @@ function getUserImage(){
   xhr.onreadystatechange = function(){
     if(xhr.readyState == XMLHttpRequest.DONE){
       console.log("Ready!");
-
       if(xhr.status == 404){
         console.log("No image here bruh");
       }
-
       else if(xhr.status == 200){
         console.log("Ready to update image!");
         var imageSource = JSON.parse(xhr.responseText);
