@@ -10,7 +10,7 @@ var xhr = new XMLHttpRequest();
 function getUserProfile(){
   var nameEle = document.getElementById("profile-name");
   var emailEle = document.getElementById("profile-email");
-  var phoneEle = document.getElementById("profile-phone");
+  var imgEle = document.getElementById("profile_image");
 
   xhr.open("GET", "/user/detail");
   xhr.onreadystatechange = function(){
@@ -22,7 +22,7 @@ function getUserProfile(){
 
         nameEle.innerText = profileData.user;
         emailEle.innerText = profileData.email;
-        phoneEle.innerText = profileData.phone;
+        imgEle.setAttribute("src","../user/img")
       }
       else if(xhr.status == 401){ // If the user is not logged in they'll be redirected to the login page
         window.location = "./login.html";

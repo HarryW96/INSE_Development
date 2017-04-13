@@ -97,19 +97,23 @@ app.post("/user/register", function(req, res){
 });
 
 // Gets a users image via email
-app.get("/user/img", function(req, res){
-  console.log(req.session.login_email);
+app.get("/user/img", function(req, res, next){
+  if(req.session.login_email === undefined){
+    console.log("Attempt to access user resource without login")
+    return next();
+  }
   var connection = mysql.createConnection(sqlLogin); //Establish connection to database
   connection.query("SELECT * FROM `user` WHERE `email` = ?",[req.session.login_email], function(err, results, fields){
-    if(imageURL == null || results[0] == undefined){
-      res.status(404).send("Profile picture not found");
+    console.log(results[0]);
+    var imageURL = results[0].profile_ref;
+    if(imageURL == null){
+      res.status(200).send("No Profile");
       connection.end();
     }
     else{
-      var imageURL = results.profile_ref;
       connection.end();
-      console.log(__dirname + "/content/profile/" + imageURL);
-      res.sendFile(__dirname + "/content/profile/" + imageURL);
+      console.log(__dirname + "/uploads/profile/" + imageURL);
+      res.sendFile(__dirname + "/uploads/profile/" + imageURL);
     }
   })
 });

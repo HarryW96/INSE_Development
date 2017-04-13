@@ -10,6 +10,9 @@ function loginCheck(){
     if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
       alert(xhr.responseText); //Login session is stablished via hidden cookie data. Setup server-side automaticlly.
     }
+    else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 404){
+      alert("Login and/or password was incorrect. Please try again.");
+    }
   }
   //console.log(userDetails);
   xhr.send(JSON.stringify(userDetails));
