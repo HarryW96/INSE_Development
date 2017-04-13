@@ -123,20 +123,22 @@ app.get("/user/img", function(req, res, next){
   To be used in sync with GET "/user/img" to allow client to request images via their email
 */
 app.post("/user/img", upload.single("profile"), function(req, res, next){
-  if(req.file == undefined){
-    res.status(404).send("No file attached!")
+  if(req.session.login_email === undefined){
+    console.log("Attempt to upload file without login");
     return next();
   }
-  if(req.query.q == undefined){
-    res.status(404).send("No email query in request!");
+
+  var email = req.session.login_email;
+  if(req.file == undefined){
+    res.status(404).send("No file attached!")
     return next();
   }
   // Change multer filename to uploaded name
   fs.rename(__dirname + "/uploads/profile/" + req.file.filename, __dirname + "/uploads/profile/" + req.file.originalname);
   // Update user's reference to profile img
   var connection = mysql.createConnection(sqlLogin);
-  connection.query("UPDATE user SET profile_ref = ? WHERE email = ?", [req.file.originalname, req.query.q])
-  res.status(200).send(req.file.originalname + " posted and linked to " + req.query.q);
+  connection.query("UPDATE user SET profile_ref = ? WHERE email = ?", [req.file.originalname, email])
+  res.status(200).send(req.file.originalname + " posted and linked to " + email);
 });
 /*
   GET: Gets event details from the event table

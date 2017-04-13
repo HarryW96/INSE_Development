@@ -63,6 +63,10 @@
         <div class="large-12 columns" id="customer_details_wrap">
             <h4>Name: <span id="profile-name">Name goes here</span></h4>
             <h4>Email: <span id="profile-email">Email goes here</span></h4>
+            <form method="post" id="file-form" action="../user/img" name="submit" enctype="multipart/form-data" target="hiddenFrame" onsubmit="setTimeout(function () { window.location.reload(); }, 10)">
+                    <input type="file" name="profile" id="file-input"></input>
+                    <input type="submit" name="submit" value="Upload" id="file-submit"></input>
+            </form>
         </div>
         <!-----Footer----->
         <div class="row">
@@ -79,6 +83,8 @@
             </div>
         </div>
     </div>
+
+    <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
     <script src="assets/js/app.js"></script>
     <script src="assets/js/profile.js"></script>
     <script src="assets/js/login-verifier.js"></script>
