@@ -37,7 +37,7 @@ function getSearchResults(){
         var eventData = JSON.parse(xhr.responseText);
 
         console.log(eventJSON);
-        
+
       if(eventData != null){
 
         searchDisplay.innerText = eventSearch;
@@ -217,7 +217,24 @@ function goToEvent(eventID){
   window.location = "../event.html?eventID=" + eventID;
 }
 
+//
+//This bit!
+//
+function checkSearchBar(){
+  var searchBar = document.getElementById("search-large").value;
+
+  if (searchBar != null){
+    getSearchResults();
+    console.log("YES")
+  }
+
+  else if (searchBar = null){
+    alert("Please enter a search query")
+    console.log("NO");
+  }
+}
+
 //On click of search button show search results.
-searchButton.addEventListener("click", getSearchResults);
+searchButton.addEventListener("click", checkSearchBar);
 
 window.addEventListener("load", getSearchResults);
