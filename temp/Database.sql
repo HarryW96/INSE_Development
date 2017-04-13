@@ -18,14 +18,5 @@ create table if not exists bookit.event(
   location VARCHAR(40) NOT NULL,
   capacity INT NOT NULL,
   descrp VARCHAR(300) NOT NULL,
-  image VARCHAR(45),
-);
-
-create table if not exists bookit.userEvent(
-  U_ID INT NOT NULL,
-  E_ID INT NOT NULL,
-  FOREIGN KEY (U_ID)
-  REFERENCES User(U_ID),
-  FOREIGN KEY (E_ID)
-  REFERENCES Event(E_ID)
+  image VARCHAR(45)
 );

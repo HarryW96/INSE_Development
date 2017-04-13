@@ -364,3 +364,19 @@
 #space-filler {
     height: 25rem;
 }
+
+#search-result:hover{
+  animation: move-toggle_frame 0.2s;
+  animation-fill-mode:forwards;
+  animation-timing-function: ease-out;
+}
+
+@keyframes move-toggle_frame{
+  0%{
+    background-color: #ecf0f1;
+  }
+  100%{
+    background-color: #34495e;
+    color:white;
+  }
+}
