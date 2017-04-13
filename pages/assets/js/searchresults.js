@@ -1,5 +1,7 @@
 var xhr = new XMLHttpRequest();
 
+var searchButton = document.getElementById("search-button");
+
 function getSearchResults(){
 
   var eventSearch = document.getElementById("search-large").value;
@@ -214,5 +216,8 @@ function getSearchResults(){
 function goToEvent(eventID){
   window.location = "../event.html?eventID=" + eventID;
 }
+
+//On click of search button show search results.
+searchButton.addEventListener("click", getSearchResults);
 
 window.addEventListener("load", getSearchResults);

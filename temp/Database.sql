@@ -8,8 +8,7 @@ create table if not exists bookit.user(
   address VARCHAR(45),
   email VARCHAR(45),
   phoneNum VARCHAR(30),
-  password VARCHAR(20),
-  UNIQUE(email)
+  password VARCHAR(20)
 );
 
 create table if not exists bookit.event(
