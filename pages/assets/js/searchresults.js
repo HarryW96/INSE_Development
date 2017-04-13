@@ -37,7 +37,7 @@ function getSearchResults(){
         var eventData = JSON.parse(xhr.responseText);
 
         console.log(eventJSON);
-
+        
       if(eventData != null){
 
         searchDisplay.innerText = eventSearch;
