@@ -167,6 +167,29 @@ app.get("/event", function(req, res, next){
   }
 });
 
+app.get("/ticket", function(req,res,next){
+  if(req.query.id){
+    var connection = mysql.createConnection(sqlLogin);
+    connection.query("SELECT * FROM `ticket` WHERE id = ?", [req.query.id], function(err, results, fields){
+      res.send(results);
+      return next();
+    });
+
+  }
+});
+
+app.post("/ticket", function(req,res,next){
+  var ticket = {
+    event_name: req.body.event_name,
+    event_date: req.body.event_date,
+    user_name: req.body.user_name,
+    event_img: req.body.event_img
+  }
+  addTicketToDatabase(ticket);
+
+  res.send(req.body.user_name + "'s ticket has been created");
+});
+
 // Create a new user entry in the database using a JSON file consisting of thier submited details.
 function addUserToDatabase(user){
   var connection = mysql.createConnection(sqlLogin);
@@ -182,6 +205,18 @@ function addUserToDatabase(user){
     if (err) throw err;
   });
   connection.end();
+}
+
+function addTicketToDatabase(ticket){
+  var connection = mysql.createConnection(sqlLogin);
+  connection.connect();
+  connection.query("INSERT INTO ticket SET ?", {
+    event_name: ticket.event_name,
+    event_date: ticket.event_date,
+    user_name: ticket.user_name,
+    event_img: ticket.event_img}, function(err, result){
+      if(err) throw err;
+  });
 }
 // Check to see if valid database exists
 function checkDatabase(){
