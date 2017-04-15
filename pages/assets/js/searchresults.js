@@ -87,7 +87,7 @@ function getSearchResults(){
         //second event shown
         if(eventData[1] !=null){
           if(eventData[1].image != null){
-            img2.setAttribute("src", "assets/img/" + eventData[1].image);
+            img2.setAttribute("src", "../ticket/img?q=" + eventData[1].image);
           }
 
           else if(eventData[1].image = null){
@@ -114,7 +114,7 @@ function getSearchResults(){
         //third event shown
         if(eventData[2] != null){
           if(eventData[2].image != null){
-            img3.setAttribute("src", "assets/img/" + eventData[2].image);
+            img3.setAttribute("src", "../ticket/img?q=" + eventData[2].image);
           }
 
           else if(eventData[2].image = null){
@@ -141,7 +141,7 @@ function getSearchResults(){
         //fourth event shown
         if(eventData[3] != null){
           if(eventData[3].image != null){
-            img4.setAttribute("src", "assets/img/" + eventData[3].image);
+            img4.setAttribute("src", "../ticket/img?q=" + eventData[3].image);
           }
 
           else if(eventData[3].image = null){
@@ -168,7 +168,7 @@ function getSearchResults(){
         if(eventData[4] != null){
 
           if(eventData[4].image != null){
-            img5.setAttribute("src", "assets/img/" + eventData[4].image);
+            img5.setAttribute("src", "../ticket/img?q=" + eventData[4].image);
           }
 
           else if(eventData[4].image = null){
