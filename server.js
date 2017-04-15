@@ -32,7 +32,6 @@ app.get("/user", function(req,res){
     res.status(401).send("No user logged in.");
   }
   else{
-    console.log("Requested user logged : " + req.session.login_fName);
     res.status(200).send(req.session.login_fName);
   }
 });
@@ -43,12 +42,10 @@ app.get("/user/detail", function(req,res){
   var details
   if (req.session.login_id == null){
     details = {"user": "N/A", "email": "N/A", "phone": "NA"};
-    console.log("No User Logged!!!");
     res.status(401).send(details);
   }
   else{
     details = {"user": req.session.login_fName,"email": req.session.login_email, "phone": req.session.login_phone}
-    console.log("User details found. Sending profile to client.");
     res.status(200).send(JSON.stringify(details));
   }
 });
@@ -68,19 +65,16 @@ app.get("/user/logout", function(req,res){
 //Check login details for when user logs in first time
 app.post("/user/login", function(req, res){
   var connection = mysql.createConnection(sqlLogin);
-  console.log(req.body.name);
   connection.query("SELECT * FROM `user` WHERE `email` = ?",[req.body.name], function(err,results,fields){
     if( results == undefined || results.length == 0 ){
       return res.status(404).send("ERROR: NO USER FOUND!");
     }
     for(i = 0;i < results.length;i++){
       if(results[i].password == req.body.pass){
-        console.log("User " + req.body.fName + " sucessfully logged in!");
         req.session.login_id = results[i].U_ID;
         req.session.login_fName = results[i].fName; //TODO loginid should be changed to loginName but as to not break other code
         req.session.login_phone = results[i].phoneNum;
         req.session.login_email = results[i].email;
-        console.log("User " + req.session.login_fName + " just logged in.");
         connection.end();
         res.send("Welcome " + req.session.login_fName);
       }
@@ -92,7 +86,6 @@ app.post("/user/login", function(req, res){
 app.post("/user/register", function(req, res){
   addUserToDatabase(req.body);
   res.send(req.body.email + " was registered sucessfully.");
-  console.log(req.body.email + " was registered sucessfully.");
   res.end("done")
 });
 
@@ -104,7 +97,6 @@ app.get("/user/img", function(req, res, next){
   }
   var connection = mysql.createConnection(sqlLogin); //Establish connection to database
   connection.query("SELECT * FROM `user` WHERE `email` = ?",[req.session.login_email], function(err, results, fields){
-    console.log(results[0]);
     var imageURL = results[0].profile_ref;
     if(imageURL == null){
       res.status(200).send("No Profile");
@@ -112,7 +104,6 @@ app.get("/user/img", function(req, res, next){
     }
     else{
       connection.end();
-      console.log(__dirname + "/uploads/profile/" + imageURL);
       res.sendFile(__dirname + "/uploads/profile/" + imageURL);
     }
   })
@@ -166,28 +157,69 @@ app.get("/event", function(req, res, next){
     return next();
   }
 });
+/*
+  Ticket Acceess
 
+  Allows get requests on events to receve tickets under a particular id.
+  Also allows to get all user events for a spesific user.
+*/
 app.get("/ticket", function(req,res,next){
+  var connection = mysql.createConnection(sqlLogin);
   if(req.query.id){
-    var connection = mysql.createConnection(sqlLogin);
     connection.query("SELECT * FROM `ticket` WHERE id = ?", [req.query.id], function(err, results, fields){
+      if(err){
+        throw err;
+      }
       res.send(results);
       return next();
     });
-
   }
+
+  else if(req.query.userid){
+    connection.query("SELECT * FROM `ticket` WHERE user_id = ?", [req.query.userid], function(err, results, fields){
+      if(err){
+        throw err;
+      }
+      res.send(results);
+      return next()
+    });
+  }
+  else{
+    res.send("No id or user entered. Please try again with appropreate parameters.");
+  }
+  connection.end();
+
 });
 
 app.post("/ticket", function(req,res,next){
-  var ticket = {
-    event_name: req.body.event_name,
-    event_date: req.body.event_date,
-    user_name: req.body.user_name,
-    event_img: req.body.event_img
-  }
-  addTicketToDatabase(ticket);
+  console.log(req.body.event_name);
+  if(req.session.login_fName){
+    var connection = mysql.createConnection(sqlLogin);
+    var ticket = {
+      event_name: req.body.event_name,
+      event_date: req.body.event_date,
+      user_name: req.session.login_fName,
+      user_id: req.session.login_id,
+      event_img: req.body.event_img
+    }
 
-  res.send(req.body.user_name + "'s ticket has been created");
+    connection.connect();
+    connection.query("INSERT INTO ticket SET ?", {
+      event_name: ticket.event_name,
+      event_date: ticket.event_date,
+      user_name: ticket.user_name,
+      user_id: ticket.user_id,
+      event_img: ticket.event_img}, function(err, result){
+        if(err) throw err;
+        res.send({
+        msg:"Created!",
+        id:result.insertId});
+    });
+  }
+  else{
+    res.status(400).send("Bad request, no active user");
+  }
+
 });
 
 // Create a new user entry in the database using a JSON file consisting of thier submited details.
@@ -208,15 +240,7 @@ function addUserToDatabase(user){
 }
 
 function addTicketToDatabase(ticket){
-  var connection = mysql.createConnection(sqlLogin);
-  connection.connect();
-  connection.query("INSERT INTO ticket SET ?", {
-    event_name: ticket.event_name,
-    event_date: ticket.event_date,
-    user_name: ticket.user_name,
-    event_img: ticket.event_img}, function(err, result){
-      if(err) throw err;
-  });
+
 }
 // Check to see if valid database exists
 function checkDatabase(){
