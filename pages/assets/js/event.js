@@ -6,6 +6,7 @@ function getEventPage(){
   var descrpEle = document.getElementById("event_description");
   var capacityEle = document.getElementById("event_capacity");
   var locationEle = document.getElementById("event_location");
+  var dateEle = document.getElementById("event-date");
   var imageEle = document.getElementById("event_image_selector");
   var eventID = window.location.search.substring(1);
   console.log(eventID);
@@ -16,17 +17,21 @@ function getEventPage(){
       if(xhr.status == 200){ // Populate elements if valid
         var profileData = JSON.parse(xhr.responseText)[0]
         console.log(profileData);
+
         titleEle.innerText = profileData.event_Name;
         descrpEle.innerText = profileData.descrp;
         capacityEle.innerText = profileData.capacity;
         locationEle.innerText = profileData.location;
+        dateEle.innerText = profileData.eDate;
 
-
-        /* Placeholder code for image functionallity
         if(profileData.image != null){
-          imageEle.setAttrabute("src",profileData.image);
+          imageEle.setAttribute("src", "assets/img/" + profileData.image);
         }
-        */
+
+        else if(profileData.image = null){
+          imageEle.setAttribute("src", "../img/eventplaceholder.jpg");
+        }
+
       }
       else if(xhr.status == 401){
         titleEle.innerText = "No event here!";

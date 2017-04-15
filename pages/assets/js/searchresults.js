@@ -7,22 +7,31 @@ function getSearchResults(){
   var eventSearch = document.getElementById("search-large").value;
   var searchDisplay = document.getElementById("searched");
 
+  var searchresult1 = document.getElementById("search-result1");
   var eventID1;
   var img1 = document.getElementById("event-img1");
   var title1 = document.getElementById("search-title1");
   var desc1 = document.getElementById("search-desc1");
+
+  var searchresult2 = document.getElementById("search-result2");
   var eventID2;
   var img2 = document.getElementById("event-img2");
   var title2 = document.getElementById("search-title2");
   var desc2 = document.getElementById("search-desc2");
+
+  var searchresult3 = document.getElementById("search-result3");
   var eventID3;
   var img3 = document.getElementById("event-img3");
   var title3 = document.getElementById("search-title3");
   var desc3 = document.getElementById("search-desc3");
+
+  var searchresult4 = document.getElementById("search-result4");
   var eventID4;
   var img4 = document.getElementById("event-img4");
   var title4 = document.getElementById("search-title4");
   var desc4 = document.getElementById("search-desc4");
+
+  var searchresult5 = document.getElementById("search-result5");
   var eventID5;
   var img5 = document.getElementById("event-img5");
   var title5 = document.getElementById("search-title5");
@@ -51,7 +60,7 @@ function getSearchResults(){
         //first event shown
         if(eventData[0] != null){
           if(eventData[0].image != null){
-            img1.setAttribute("src", eventData[0].image);
+            img1.setAttribute("src", "/assets/img/" + eventData[0].image);
           }
 
           else if(eventData[0].image = null){
@@ -63,7 +72,7 @@ function getSearchResults(){
 
           eventID1 = eventData[0].E_ID;
 
-          title1.addEventListener("click", function(){
+          searchresult1.addEventListener("click", function(){
             goToEvent(eventID1)
           });
         }
@@ -77,7 +86,7 @@ function getSearchResults(){
         //second event shown
         if(eventData[1] !=null){
           if(eventData[1].image != null){
-            img2.setAttribute("src", eventData[1].image);
+            img2.setAttribute("src", "assets/img/" + eventData[1].image);
           }
 
           else if(eventData[1].image = null){
@@ -89,7 +98,7 @@ function getSearchResults(){
 
           eventID2 = eventData[1].E_ID;
 
-          title2.addEventListener("click", function(){
+          searchresult2.addEventListener("click", function(){
             goToEvent(eventID2)
           });
         }
@@ -104,7 +113,7 @@ function getSearchResults(){
         //third event shown
         if(eventData[2] != null){
           if(eventData[2].image != null){
-            img3.setAttribute("src", eventData[2].image);
+            img3.setAttribute("src", "assets/img/" + eventData[2].image);
           }
 
           else if(eventData[2].image = null){
@@ -116,7 +125,7 @@ function getSearchResults(){
 
           eventID3 = eventData[2].E_ID;
 
-          title3.addEventListener("click", function(){
+          searchresult3.addEventListener("click", function(){
             goToEvent(eventID3)
           });
         }
@@ -131,7 +140,7 @@ function getSearchResults(){
         //fourth event shown
         if(eventData[3] != null){
           if(eventData[3].image != null){
-            img4.setAttribute("src", eventData[3].image);
+            img4.setAttribute("src", "assets/img/" + eventData[3].image);
           }
 
           else if(eventData[3].image = null){
@@ -143,7 +152,7 @@ function getSearchResults(){
 
           eventID4 = eventData[3].E_ID;
 
-          title4.addEventListener("click", function(){
+          searchresult4.addEventListener("click", function(){
             goToEvent(eventID4)
           });
         }
@@ -158,7 +167,7 @@ function getSearchResults(){
         if(eventData[4] != null){
 
           if(eventData[4].image != null){
-            img5.setAttribute("src", eventData[4].image);
+            img5.setAttribute("src", "assets/img/" + eventData[4].image);
           }
 
           else if(eventData[4].image = null){
@@ -170,7 +179,7 @@ function getSearchResults(){
 
           eventID5 = eventData[4].E_ID;
 
-          title5.addEventListener("click", function(){
+          searchresult5.addEventListener("click", function(){
             goToEvent(eventID5)
           });
         }
@@ -223,9 +232,6 @@ function goToEvent(eventID){
   window.location = "../event.html?eventID=" + eventID;
 }
 
-//
-//This bit!
-//
 function checkSearchBar(){
   var searchBar = document.getElementById("search-large").value;
   if (searchBar != ""){

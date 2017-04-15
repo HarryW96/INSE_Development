@@ -328,6 +328,18 @@
 
 
 /*Event Page Styling*/
+#event-date{
+    padding: 0 !important;
+}
+
+#event_location{
+    padding-bottom: 2rem;
+}
+
+#event_capacity{
+    padding: 0 !important;
+    padding-bottom: 1rem;
+}
 
 #event_heading {
     text-align: center;
@@ -351,7 +363,7 @@
 }
 
 #event_description {
-    padding-left: 18rem;
+    padding-left: 0 !important;
     padding-right: 6rem;
 }
 
@@ -393,9 +405,12 @@
     }
 }
  /*Search Results Styling*/
+
 #event-img img{
   float: right;
   padding-right: 2rem;
+  height: 225px;
+  width: 485px;
 }
 
 #title-desc{
@@ -406,7 +421,7 @@
   padding-top: 1rem;
 }
 
-#search-result{
+.search-result{
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
@@ -420,10 +435,11 @@
     height: 25rem;
 }
 
-#search-result:hover{
+.search-result:hover{
   animation: move-toggle_frame 0.2s;
   animation-fill-mode:forwards;
   animation-timing-function: ease-out;
+  cursor: pointer;
 }
 
 @keyframes move-toggle_frame{
