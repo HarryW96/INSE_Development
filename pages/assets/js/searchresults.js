@@ -44,6 +44,7 @@ function getSearchResults(){
 
         var eventJSON = xhr.responseText;
         var eventData = JSON.parse(xhr.responseText);
+        console.log(eventData);
 
 
 
@@ -60,7 +61,7 @@ function getSearchResults(){
         //first event shown
         if(eventData[0] != null){
           if(eventData[0].image != null){
-            img1.setAttribute("src", "/assets/img/" + eventData[0].image);
+            img1.setAttribute("src", "../ticket/img?q=" + eventData[0].image);
           }
 
           else if(eventData[0].image = null){

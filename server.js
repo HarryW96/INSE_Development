@@ -188,8 +188,13 @@ app.get("/ticket", function(req,res,next){
     res.send("No id or user entered. Please try again with appropreate parameters.");
   }
   connection.end();
-
 });
+
+app.get("/ticket/img", function(req,res,next){
+  if(req.query.q){
+    res.sendFile(__dirname + "/uploads/event/" + req.query.q);
+  }
+})
 
 app.post("/ticket", function(req,res,next){
   if(req.session.login_fName){
