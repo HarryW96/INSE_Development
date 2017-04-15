@@ -9,6 +9,7 @@ function loginCheck(){
   xhr.onreadystatechange = function(){
     if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
       alert(xhr.responseText); //Login session is stablished via hidden cookie data. Setup server-side automaticlly.
+      window.location = "/profile.html";
     }
     else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 404){
       alert("Login and/or password was incorrect. Please try again.");
