@@ -15,7 +15,6 @@ function getEventPage(){
     if(xhr.readyState == XMLHttpRequest.DONE){
       if(xhr.status == 200){ // Populate elements if valid
         profileData = JSON.parse(xhr.responseText)[0]
-        console.log(profileData);
         titleEle.innerText = profileData.event_Name;
         descrpEle.innerText = profileData.descrp;
         capacityEle.innerText = profileData.capacity;

@@ -192,7 +192,6 @@ app.get("/ticket", function(req,res,next){
 });
 
 app.post("/ticket", function(req,res,next){
-  console.log(req.body.event_name);
   if(req.session.login_fName){
     var connection = mysql.createConnection(sqlLogin);
     var ticket = {
