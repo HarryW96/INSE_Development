@@ -2,6 +2,7 @@
 
 
 var xhr = new XMLHttpRequest();
+var profileData;
 
 /*
  Will check if users are currently logged in and if they are it'll update the profile with their infomation
@@ -18,11 +19,12 @@ function getUserProfile(){
       console.log("Ready!");
       if(xhr.status == 200){
         console.log("Ready to update profile!");
-        var profileData = JSON.parse(xhr.responseText);
+        profileData = JSON.parse(xhr.responseText);
 
         nameEle.innerText = profileData.user;
         emailEle.innerText = profileData.email;
         imgEle.setAttribute("src","../user/img")
+        getUserTickets();
       }
       else if(xhr.status == 401){ // If the user is not logged in they'll be redirected to the login page
         window.location = "./login.html";
@@ -55,6 +57,27 @@ function getUserImage(){
 
 function getUserTickets(){
   var xhr = new XMLHttpRequest();
+  var ticketList = document.getElementById("ticket-list");
+  console.log(profileData.user);
+  xhr.open("GET", "/ticket?userid=" + profileData.id);
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+      var tickets = JSON.parse(xhr.responseText);
+
+      for(i = 0;tickets.length > i;i++){
+        var li = document.createElement("li");
+        li.innerText = tickets[i].event_name;
+        li.setAttribute("ticketid",tickets[i].id);
+        li.onclick = function(){
+          window.location.href = "../ticket.html?id=" + this.getAttribute("ticketid");
+          console.log("meme")
+        }
+        ticketList.appendChild(li);
+      }
+
+    }
+  }
+
+  xhr.send()
 }
-window.addEventListener("load", getUserTickets);
 window.addEventListener("load", getUserProfile);

@@ -45,7 +45,7 @@ app.get("/user/detail", function(req,res){
     res.status(401).send(details);
   }
   else{
-    details = {"user": req.session.login_fName,"email": req.session.login_email, "phone": req.session.login_phone}
+    details = {"user": req.session.login_fName,"email": req.session.login_email, "phone": req.session.login_phone, "id": req.session.login_id}
     res.status(200).send(JSON.stringify(details));
   }
 });
