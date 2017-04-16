@@ -4,7 +4,7 @@ function buildTicket(){
   var id = getQueryVariable("id");
   var eventName = document.getElementById("event-name");
   var eventDate = document.getElementById("event-date");
-  //var eventPerson = document.getElementById("TOBEDONE")
+  var eventPerson = document.getElementById("event-username");
   var eventImage = document.getElementById("event-img");
   xhr.open("GET","/ticket?id=" + id);
   xhr.onreadystatechange = function(){
@@ -12,8 +12,10 @@ function buildTicket(){
       var ticket = JSON.parse(xhr.responseText)[0];
       eventName.innerText = ticket.event_name;
       eventDate.innerText = ticket.event_date;
-      eventImage.setAttribute("src","../ticket/img?q=" + ticket.event_img);
-      console.log(ticket)
+      eventPerson.innerText = ticket.user_name;
+      if(ticket.event_img != null){
+        eventImage.setAttribute("src","../ticket/img?q=" + ticket.event_img);
+      }
     }
   }
   xhr.send();

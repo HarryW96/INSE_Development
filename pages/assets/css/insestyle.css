@@ -456,3 +456,23 @@
     text-align: center;
     padding-bottom: 1rem;
 }
+
+#ticket-container-profile{
+  width:300px;
+  height:400px;
+  border:4px;
+  border-style: inset;
+  float:right;
+  margin-right:75px;
+}
+
+#ticket-list{
+  margin: 0px;
+}
+
+#ticket-list li{
+  margin-bottom:2px;
+  list-style-type: none;
+  width:292px;
+  background-color: blue;
+}

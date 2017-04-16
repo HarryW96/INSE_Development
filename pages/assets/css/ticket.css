@@ -44,7 +44,7 @@ html{
   border-color: black;
 }
 
-#ticket-details-container-date{
+.ticket-details-container{
   text-align: center;
   background-color: pink;
   border-style: groove;
@@ -55,14 +55,14 @@ html{
   background-color: #2ecc71;
 }
 
-#ticket-details-container-date p{
+.ticket-details-container p{
   font-size: 15px;
   margin-bottom: 5px;
   margin-top: 4px;
   bottom: 5px;
 }
 
-#ticket-details-container-date h2{
+.ticket-details-container h2{
   margin-top:0px;
   margin-bottom: 6px;
 }

@@ -53,4 +53,8 @@ function getUserImage(){
   xhr.send(null);
 }
 
+function getUserTickets(){
+  var xhr = new XMLHttpRequest();
+}
+window.addEventListener("load", getUserTickets);
 window.addEventListener("load", getUserProfile);
