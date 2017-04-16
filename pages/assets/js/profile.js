@@ -71,7 +71,6 @@ function getUserTickets(){
         li.onclick = function(){
           window.location.href = "../ticket.html?id=" + this.getAttribute("ticketid");
         }
-        console.log(ticketDate)
         ticketList.appendChild(li);
       }
 
