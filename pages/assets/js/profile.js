@@ -70,8 +70,8 @@ function getUserTickets(){
         li.setAttribute("ticketid",tickets[i].id);
         li.onclick = function(){
           window.location.href = "../ticket.html?id=" + this.getAttribute("ticketid");
-          console.log("meme")
         }
+        console.log(ticketDate)
         ticketList.appendChild(li);
       }
 

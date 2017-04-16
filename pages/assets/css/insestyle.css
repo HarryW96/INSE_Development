@@ -474,5 +474,28 @@
   margin-bottom:2px;
   list-style-type: none;
   width:292px;
-  background-color: blue;
+  list-style: none;
+  font-size: 15px;
+  background-color: white;
+  color: black;
+  border-bottom: 2px;
+  border-style: inset;
+}
+
+#ticket-list li:hover{
+  animation: file-hover 0.2s;
+  animation-fill-mode:forwards;
+  animation-timing-function: ease-out;
+}
+
+
+
+@keyframes file-hover{
+  0%{
+    background-color: white;
+  }
+  100%{
+    background-color: #34495e;
+    color:white;
+  }
 }
