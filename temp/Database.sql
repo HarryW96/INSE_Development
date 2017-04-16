@@ -1,6 +1,6 @@
 create database if not exists bookit;
 
-create table if not exists bookit.user(
+CREATE TABLE IF NOT EXISTS bookit.user(
   U_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   fName VARCHAR(20) NOT NULL,
   lName VARCHAR(20) NOT NULL,
@@ -11,7 +11,7 @@ create table if not exists bookit.user(
   password VARCHAR(20)
 );
 
-create table if not exists bookit.event(
+CREATE TABLE IF NOT EXISTS bookit.event(
   E_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   event_Name VARCHAR(40) NOT NULL,
   eDate DATE NOT NULL,
@@ -19,4 +19,14 @@ create table if not exists bookit.event(
   capacity INT NOT NULL,
   descrp VARCHAR(300) NOT NULL,
   image VARCHAR(45)
+);
+
+CREATE TABLE IF NOT EXISTS bookit.ticket (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `event_name` varchar(45) NOT NULL,
+ `event_date` date NOT NULL,
+ `user_name` varchar(45) NOT NULL,
+ `user_id` int(11) NOT NULL,
+ `event_img` varchar(100) DEFAULT NULL,
+ PRIMARY KEY (`id`)
 );
