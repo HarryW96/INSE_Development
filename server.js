@@ -180,7 +180,13 @@ app.get("/ticket", function(req,res,next){
       if(err){
         throw err;
       }
-      res.send(results);
+      if(results.length != 0){
+        res.send(results);
+      }
+      else{
+        res.send("No results found");
+      }
+
       return next()
     });
   }
