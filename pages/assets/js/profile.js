@@ -1,16 +1,14 @@
 /*
   @Author Shaun Porter(770117)
 */
-
-
-var xhr = new XMLHttpRequest();
-var profileData;
+var profileData; // Create global reference to the users details
 
 /*
  Will check if users are currently logged in and if they are it'll update the profile with their infomation
  Otherwise if it finds that there's no active login session it'll redirect the user to the login page.
 */
 function getUserProfile(){
+  var xhr = new XMLHttpRequest();
   var nameEle = document.getElementById("profile-name");
   var emailEle = document.getElementById("profile-email");
   var imgEle = document.getElementById("profile_image");
@@ -37,6 +35,7 @@ function getUserProfile(){
 }
 
 function getUserImage(){
+  var xhr = new XMLHttpRequest();
   var profile_image = document.getElementById('profile_image');
 
   xhr.open("GET", "/user/img");
