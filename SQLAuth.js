@@ -1,7 +1,7 @@
 /*
   @Author Shaun Porter(770117)
 */
-
+/* SQL Verfication */
 var sqlLogin = {
   host: "localhost",
   user: "root",
