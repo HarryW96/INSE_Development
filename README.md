@@ -1,7 +1,7 @@
 # INSE_Development
 Location for INSE Development UoP 2nd Year 16/17.
 
-#Installation
+# Installation
 
 ## Prerequisites
 Browser (Chrome, firefox, Edge): 
