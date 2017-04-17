@@ -1,5 +1,6 @@
 create database if not exists bookit;
 
+/*enables the system to store information to user, event and ticket*/
 CREATE TABLE IF NOT EXISTS bookit.user(
   U_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   fName VARCHAR(20) NOT NULL,
