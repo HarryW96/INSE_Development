@@ -13,7 +13,7 @@ MySQL (XAMPP for windows machines):
   Linux: "sudo apt-get install mysql-server"
 
 
-##Client-Server Setup
+## Client-Server Setup
 
 1) Download project.
 2) cd to respective directory and run "npm install"
