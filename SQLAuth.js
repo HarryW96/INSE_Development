@@ -1,3 +1,7 @@
+/*
+  @Author Shaun Porter(770117)
+*/
+
 var sqlLogin = {
   host: "localhost",
   user: "root",

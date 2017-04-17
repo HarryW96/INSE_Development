@@ -1,3 +1,7 @@
+/*
+  @Author Shaun Porter(770117)
+*/
+
 // Will show who's currently logged in
 function getLoginDetails(){
   var xhr = new XMLHttpRequest();

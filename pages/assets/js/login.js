@@ -1,3 +1,7 @@
+/*
+  @Author Shaun Porter(770117)
+*/
+
 function loginCheck(){
   var xhr = new XMLHttpRequest;
   var name = document.getElementById("log-user");

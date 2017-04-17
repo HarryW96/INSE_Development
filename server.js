@@ -1,3 +1,7 @@
+/*
+  @Author Shaun Porter(770117)
+*/
+
 // Express and AJAX
 var express = require("express");
 var session = require("express-session");
@@ -19,8 +23,6 @@ app.use(session({
   saveUninitialized: true,
   //cookie: {secure:true}
 }));
-
-
 
 
 /*-------------------- REST Functions --------------------------- */

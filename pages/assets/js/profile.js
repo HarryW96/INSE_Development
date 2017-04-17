@@ -1,4 +1,6 @@
-//TODO Prehaps split script and have it load before the DOM to avoid the user seeing the profile page and then having them redirected to login?
+/*
+  @Author Shaun Porter(770117)
+*/
 
 
 var xhr = new XMLHttpRequest();

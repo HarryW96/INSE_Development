@@ -1,3 +1,7 @@
+/*
+  @Author Shaun Porter(770117)
+*/
+
 var xhr = new XMLHttpRequest();
 var eventID = window.location.search.substring(1);
 var profileData;

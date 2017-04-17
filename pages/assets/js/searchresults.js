@@ -1,3 +1,7 @@
+/*
+  @Author Harry Westbrook
+*/
+
 var xhr = new XMLHttpRequest();
 
 var searchButton = document.getElementById("search-button");
