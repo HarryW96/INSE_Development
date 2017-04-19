@@ -10,7 +10,7 @@ CREATE TABLE `event` (
  `descrp` varchar(300) NOT NULL,
  `image` varchar(45) DEFAULT NULL,
  PRIMARY KEY (`E_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=206 DEFAULT CHARSET=latin1
+)
 
 CREATE TABLE `ticket` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -20,7 +20,7 @@ CREATE TABLE `ticket` (
  `user_id` int(11) NOT NULL,
  `event_img` varchar(100) DEFAULT NULL,
  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1
+) 
 
 CREATE TABLE `user` (
  `U_ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -33,4 +33,4 @@ CREATE TABLE `user` (
  `password` varchar(20) DEFAULT NULL,
  `profile_ref` varchar(100) DEFAULT NULL,
  PRIMARY KEY (`U_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1
+) 
