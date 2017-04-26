@@ -34,6 +34,10 @@ function getUserProfile(){
   xhr.send(null);
 }
 
+/*
+  Retreve the appropreate user image from the server
+  and show it on user profile.
+*/
 function getUserImage(){
   var xhr = new XMLHttpRequest();
   var profile_image = document.getElementById('profile_image');
@@ -56,6 +60,9 @@ function getUserImage(){
   xhr.send(null);
 }
 
+/*
+  Retreve a list of tickets for the user and populate a list of their tickets.
+*/
 function getUserTickets(){
   var xhr = new XMLHttpRequest();
   var ticketList = document.getElementById("ticket-list");
@@ -77,7 +84,6 @@ function getUserTickets(){
 
     }
   }
-
   xhr.send()
 }
 window.addEventListener("load", getUserProfile);
