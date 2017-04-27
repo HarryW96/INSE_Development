@@ -2,7 +2,6 @@
   @Author Shaun Porter(770117)
 */
 
-
 /*
   Constructs ticket details using fields from page as data.
   Sends data to API to construct and initalize new ticket.

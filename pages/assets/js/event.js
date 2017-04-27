@@ -45,13 +45,12 @@ function getEventPage(){
 */
 function getTicket(){
   var xhr = new XMLHttpRequest();
-  var ticket = { // Get details from page
+  var ticket = { // Get details from page and create a ticket object
     event_name: profileData.event_Name,
     event_date: profileData.eDate,
     event_img: profileData.image
   }
-
-  xhr.open("POST","/ticket"); // Post to /ticket
+  xhr.open("POST","/ticket");
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = function(){
     if(xhr.readyState === XMLHttpRequest.DONE){
@@ -62,7 +61,6 @@ function getTicket(){
   }
   xhr.send(JSON.stringify(ticket)); // Send ticket details.
 }
-
 
 document.getElementById("event_heading").addEventListener("click",getTicket);
 window.addEventListener("load", getEventPage);

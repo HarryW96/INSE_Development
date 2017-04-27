@@ -25,7 +25,7 @@ app.use(session({
 }));
 
 
-/*-------------------- REST Functions --------------------------- */
+/*---------------------------  REST Functions --------------------------- */
 
 //Checks if there's a currently logged in user and sends back what user is logged in.
 app.get("/user", function(req,res){
@@ -54,6 +54,7 @@ app.get("/user/detail", function(req,res){
     res.status(200).send(JSON.stringify(details));
   }
 });
+
 /*
   Destroys the current session of the active user and returns an error message if there's no user
   @Session-Params:
@@ -114,7 +115,6 @@ app.post("/user/register", function(req, res){
   Returns error message if there is no active user
   @Session-Params:
     login_email: The account login and email for a user
-
 */
 app.get("/user/img", function(req, res, next){
   if(req.session.login_email === undefined){
@@ -214,7 +214,6 @@ app.get("/ticket", function(req,res,next){
       else{
         res.send("No results found");
       }
-
       return next()
     });
   }
